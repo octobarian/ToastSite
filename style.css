@@ -1,3 +1,9 @@
+.box{
+    height: 30px;
+    width: 10%;
+    background-color:azure;
+    text-align: center;
+}
 .member {
     float: left;
     width: 25%;
