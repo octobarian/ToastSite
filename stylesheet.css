@@ -20,7 +20,7 @@ body {
 
 /* mobile size first */
 .grid-container {
-  width: 95%;
+  width: 100%;
   margin: 3em 0 0 3em;
 
   display: grid;
@@ -47,21 +47,14 @@ body {
 }
 
 /* Styles the detailed weather area in the main box */
-.weather {
-  display: flex;
+.info {
+  display: inherit;
   flex-direction: column;
   position: relative;
 }
 
-.weather img {
-  width: 300px;
-  height: 240px;
-  display: block;
-
-}
-
-.weather div {
-  position: absolute;
+.info div {
+  position: inherit;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -72,38 +65,17 @@ body {
   opacity: 0.7;
 }
 
-.weather h2 {
-  font-size: 6rem;
-  font-weight: 800;
-}
-
-.weather p {
+.info p {
   font-size: 2rem;
   font-weight: 400;
   text-transform: capitalize;
 }
 
 /* Styling for box class inside the article */
-.box section {
-  padding: 5px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-column-gap: 3px;
-
-}
 
 .box h1 {
   font-size: 2rem;
   padding: 0.5rem;
   text-align: center;
   background-color: var(--box-head-color);
-}
-
-.box section h3 {
-  font-size: 1rem;
-}
-
-.box section div {
-  align-self: center;
-  justify-self: center;
 }
