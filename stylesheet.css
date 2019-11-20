@@ -1,103 +1,107 @@
 :root {
-  --box-head-color: #429fca;
-  --box-text-color: #f8f9f8;
-  --box-foot-color: #eb4839;
+    --box-head-color: #3AAFA9;
+    --box-text-color: #FEFFFF;
+    --box-foot-color: #2B7A78;
+    --box-link-color: #17252A;
+    --box-topper-color: #DEF2F1;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Background Photo by Cédric Dhaenens on Unsplash 
    https://unsplash.com/photos/Zz_3R91RQyo   */
 body {
-    font-family: 'Open Sans', Helvetica, sans-serif;  
-    background-image: url('../images/cedric-dhaenens-674712-unsplash.jpg')
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  background-image: url('../images/cedric-dhaenens-674712-unsplash.jpg')
 }
 
 
-/* mobile size first */
+/* Desktop size by default */
 .grid-container {
-  width: 95%;
+  width: 90%;
   margin: 3em 0 0 3em;
-  
-      display: grid;
-      grid-template-columns: 1fr ;
-      grid-row-gap: 20px;
-      grid-column-gap: 5%;
-      text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-row-gap: 20px;
+  grid-column-gap: 5%;
+  text-align: center;
 }
 
-/* then desktop/tablet size */
-@media only screen and (min-width: 850px) {
-    .grid-container {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }    
-}
+/* Mobile size */
+@media only screen and (max-width: 700px) {
+  body {
+    background-color: red;
+  }
 
+  .grid-container {
+    grid-template-columns: 1fr;
+
+  }
+}
 
 .box {
-  border-radius: 5px;
-  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);  
-  color: var(--box-text-color);
-  background-color:var(--box-foot-color);
-  max-width: 300px;
+    border-radius: 5px;
+    box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+    color: var(--box-text-color);
+    background-color: var(--box-foot-color);
+    max-width: 300px;
+    height: 110px;
 }
 
-
-.weather {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+.top {
+    margin: auto;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+    color: var(--box-text-color);
+    background-color: var(--box-topper-color);
+    max-width: 300px;
+    height: 110px;
 }
-.weather img {
-    width: 300px;
-    height: 240px;    
-    display: block;
 
+.top h1 {
+  font-size: 1.7rem;
+  text-align: center;
+  background-color: var(--box-head-color);
 }
-.weather div {
-  position: absolute;
+
+/* Styles the detailed weather area in the main box */
+.info {
+  display: inherit;
+  flex-direction: column;
+  position: relative;
+}
+
+.info div {
+position: inherit;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);  
-    box-align: center;
-    align-items: center;
-    justify-content: center;
-    
-    opacity: 0.7;
-}
-.weather h2 {
-    font-size: 6rem;
-    font-weight: 800;
-}
-.weather p {
-    font-size: 2rem;
-    font-weight: 400;
-    text-transform: capitalize;
+  transform: translate(-50%, +20%);
+  box-align: center;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
 }
 
-
-.box section {
-    padding: 5px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;    
-    grid-column-gap: 3px;
-      
+.info p {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: capitalize;
 }
+
+/* Styling for box class inside the article */
 
 .box h1 {
-    font-size: 2rem;
-    padding: 0.5rem;
-    text-align: center;
-    background-color:var(--box-head-color);
+  font-size: 2rem;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: var(--box-head-color);
 }
-.box section h3 {
-  font-size: 1rem;
-}
-.box section div {
-  align-self: center;
-  justify-self: center;
+
+a {
+    color: var(--box-link-color);
 }
