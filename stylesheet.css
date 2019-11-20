@@ -18,25 +18,29 @@ body {
 }
 
 
-/* mobile size first */
+/* Desktop size by default */
 .grid-container {
-  width: 100%;
+  width: 90%;
   margin: 3em 0 0 3em;
 
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-row-gap: 20px;
   grid-column-gap: 5%;
   text-align: center;
 }
 
-/* then desktop/tablet size */
-@media only screen and (min-width: 850px) {
+/* Mobile size */
+@media only screen and (max-width: 700px) {
+  body {
+    background-color: red;
+  }
+
   .grid-container {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+
   }
 }
-
 
 .box {
   border-radius: 5px;
