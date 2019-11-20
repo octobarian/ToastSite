@@ -1,0 +1,12 @@
+.member {
+    float: left;
+    width: 25%;
+    background-color: aliceblue
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
