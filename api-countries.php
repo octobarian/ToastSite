@@ -2,9 +2,9 @@
     <?php
     $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
 
-        if(isset($_GET['ison'])){
-          $ison = $_GET['ison'];
-          $sql = "select * from countries where ISONumeric = $ison";
+        if(isset($_GET['iso'])){
+          $iso = $_GET['iso'];
+          $sql = "select * from countries where iso = $iso";
         }
         else{
           $sql = "select * from countries";
