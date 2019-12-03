@@ -2,33 +2,32 @@
     <?php
     $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
 
-        if(isset($_GET['iso'])){
-          $iso = $_GET['iso'];
-          $sql = "select * from countries where iso = $iso";
-        }
-        else{
-          $sql = "select * from countries";
-        }
+    if (isset($_GET['iso'])) {
+      $iso = $_GET['iso'];
+      $sql = "select * from countries where iso = $iso";
+    } else {
+      $sql = "select * from countries";
+    }
 
-        $json = array();
+    $json = array();
 
-        // if ($result = mysqli_query($connection, $sql)) {
-        //     //https://stackoverflow.com/questions/383631/json-encode-mysql-results
-        //       while($r = mysqli_fetch_assoc($result)) {
-        //         $json[] = $r;
-        //       }
+    // if ($result = mysqli_query($connection, $sql)) {
+    //     //https://stackoverflow.com/questions/383631/json-encode-mysql-results
+    //       while($r = mysqli_fetch_assoc($result)) {
+    //         $json[] = $r;
+    //       }
 
-        //     // release the memory used by the result set
-        //     mysqli_free_result($result);
-        // }
+    //     // release the memory used by the result set
+    //     mysqli_free_result($result);
+    // }
 
-        if($result = mysqli_query($connection, $sql)){
-          while ($row = mysqli_fetch_assoc($result)){
-            $json[] = $row;
-          }
-        }
+    if ($result = mysqli_query($connection, $sql)) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        $json[] = $row;
+      }
+    }
 
-        // close the database connection
-        mysqli_close($connection);
-        echo json_encode($json);
-        ?>
+    // close the database connection
+    mysqli_close($connection);
+    echo json_encode($json);
+    ?>

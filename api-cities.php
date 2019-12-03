@@ -2,23 +2,22 @@
     <?php
     $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
 
-        if(isset($_GET['cityCode'])){
-          $cityCode = $_GET['cityCode'];
-          $sql = "select * from cities where CityCode = $cityCode";
-        }
-        else{
-          $sql = "select * from cities";
-        }
+    if (isset($_GET['cityCode'])) {
+      $cityCode = $_GET['cityCode'];
+      $sql = "select * from cities where CityCode = $cityCode";
+    } else {
+      $sql = "select * from cities";
+    }
 
-        $json = array();
+    $json = array();
 
-        if($result = mysqli_query($connection, $sql)){
-          while ($row = mysqli_fetch_assoc($result)){
-            $json[] = $row;
-          }
-        }
+    if ($result = mysqli_query($connection, $sql)) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        $json[] = $row;
+      }
+    }
 
-        // close the database connection
-        mysqli_close($connection);
-        echo json_encode($json);
-        ?>
+    // close the database connection
+    mysqli_close($connection);
+    echo json_encode($json);
+    ?>
