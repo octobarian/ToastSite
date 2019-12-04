@@ -4,6 +4,11 @@
 //Storing database as an object that we can access
 
 require_once('config.inc.php');
+require_once('api-cities.php');
+require_once('single-photo.php');
+
+$test = json_encode($json);
+echo $test;
 
 function getCityName()
 { }
