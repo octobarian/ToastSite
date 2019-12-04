@@ -5,28 +5,8 @@ let COUNTRIES;
 document.addEventListener("DOMContentLoaded", function () {
 
     //Links are just local to test for now
-    const citiesAPI = 'http://127.0.0.1/Github/COMP-3512-A2/api-cities.php';
     const countriesAPI = 'http://127.0.0.1/Github/COMP-3512-A2/api-countries.php';
-
-    if (CITIES == null) {
-        fetch(citiesAPI, {
-                //Browser error without this line    
-                mode: 'no-cors'
-            })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                localStorage.setItem('Cities', JSON.stringify(data));
-                CITIES = JSON.parse(localStorage.getItem('Cities'));
-                console.log(CITIES);
-            })
-            .catch(function () {
-                console.log("ERROR In Fetch");
-            });
-    } else {
-        CITIES = JSON.parse(localStorage.getItem('Cities'));
-    }
+    const citiesAPI = 'http://127.0.0.1/Github/COMP-3512-A2/api-cities.php';
 
     if (COUNTRIES == null) {
         fetch(countriesAPI, {
@@ -37,9 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then(function (data) {
-                localStorage.setItem('Countries', JSON.stringify(data));
+
+                //Sorts Countries alphabetically by ISO
+                const sortedCountries = data.sort((a, b) => {
+                    return a.ISO < b.ISO ? -1 : 1;
+                });
+
+                localStorage.setItem('Countries', JSON.stringify(sortedCountries));
                 COUNTRIES = JSON.parse(localStorage.getItem('Countries'));
-                console.log(COUNTRIES);
+                //console.log(COUNTRIES);
+                loadCountries();
             })
             .catch(function () {
                 console.log("ERROR In Fetch");
@@ -48,4 +35,46 @@ document.addEventListener("DOMContentLoaded", function () {
         COUNTRIES = JSON.parse(localStorage.getItem('Countries'));
     }
 
+    if (CITIES == null) {
+        fetch(citiesAPI, {
+                //Browser error without this line    
+                mode: 'no-cors'
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+
+                //Sorts Cities alphabetically by CountryCodeISO
+                const sortedCities = data.sort((a, b) => {
+                    return a.CountryCodeISO < b.CountryCodeISO ? -1 : 1;
+                });
+
+                localStorage.setItem('Cities', JSON.stringify(sortedCities));
+                CITIES = JSON.parse(localStorage.getItem('Cities'));
+                console.log(CITIES);
+            })
+            .catch(function () {
+                console.log("ERROR In Fetch");
+            });
+    } else {
+        CITIES = JSON.parse(localStorage.getItem('Cities'));
+    }
 })
+
+//-----COUNTRY PAGE FUNCTIONS--------------------------------------------------------------------------------------
+
+//Populate Countries On Initial Country Page Load
+function loadCountries() {
+    for (let c of COUNTRIES) {
+        console.log(c)
+        //Adds the countries into the li element
+        const list = document.querySelector('#countryList');
+        const newListItems = document.createElement('li');
+        list.appendChild(newListItems);
+        newListItems.textContent = c.CountryName;
+
+        //Just a test variable
+        newListItems.setAttribute("id", c.CityCode);
+    };
+}
