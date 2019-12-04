@@ -69,7 +69,7 @@ function loadCountries() {
     for (let c of COUNTRIES) {
         //console.log(c)
         //Adds the countries into the li element
-        const list = document.querySelector('#countryList');
+        const list = document.querySelector('#country-list');
         const newListItems = document.createElement('li');
         const newLink = document.createElement('a');
         newListItems.appendChild(newLink);
