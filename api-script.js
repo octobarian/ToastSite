@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 localStorage.setItem('Cities', JSON.stringify(sortedCities));
                 CITIES = JSON.parse(localStorage.getItem('Cities'));
-                console.log(CITIES);
+                //console.log(CITIES);
             })
             .catch(function () {
                 console.log("ERROR In Fetch");
@@ -67,14 +67,16 @@ document.addEventListener("DOMContentLoaded", function () {
 //Populate Countries On Initial Country Page Load
 function loadCountries() {
     for (let c of COUNTRIES) {
-        console.log(c)
+        //console.log(c)
         //Adds the countries into the li element
         const list = document.querySelector('#countryList');
         const newListItems = document.createElement('li');
+        const newLink = document.createElement('a');
+        newListItems.appendChild(newLink);
         list.appendChild(newListItems);
-        newListItems.textContent = c.CountryName;
+        newLink.textContent = c.CountryName;
 
-        //Just a test variable
-        newListItems.setAttribute("id", c.CityCode);
+        //Sets attribute to <a href=''> link
+        newLink.setAttribute("href", 'single-country.php?iso=' + c.ISO);
     };
 }
