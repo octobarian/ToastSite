@@ -14,13 +14,19 @@ require_once('config.inc.php');
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="filter-list.css">
 </head>
+
+<header>
+    <h1>COMP 3512 Assignment 2</h1>
+</header>
 
 <body>
     <ul id='countryList'>
+        <!-- All of the countries will be populated here as list items -->
     </ul>
 </body>
 
-<script src="api-script.js"></script>
+<script src="js/api-script.js"></script>
 
 </html>
