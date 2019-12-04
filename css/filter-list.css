@@ -1,0 +1,109 @@
+/* 
+*   Stylesheet for the Country and City Pages
+*/
+
+/*
+   CSS RESET RETRIEVED FROM
+   http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+h1,
+h2,
+p,
+ul,
+li,
+form,
+footer,
+header,
+section,
+summary {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* Centers the header */
+header {
+    text-align: center;
+    font-size: 2em;
+    padding: 0.5em;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+/*
+    SET'S UP THE MAIN 3 COLUMN LAYOUT ---------------------------------------------------
+*/
+.main-container {
+    display: grid;
+    margin: 1em;
+    padding: 1em;
+    grid-template-columns: 15% 45% 40%;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "filter details photos"
+        "filter details photos"
+        "filter details photos";
+}
+
+/* Left Column */
+.country-container {
+    grid-area: filter;
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+/* Center Column */
+.details-container {
+    grid-area: details;
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+/* Right Column */
+.country-photo-container {
+    grid-area: photos;
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+/* 
+    COUNTRY-CONTAINER (LEFT COLUMN) LAYOUT ----------------------------------------------
+*/
+
+/* Creates box area for filters */
+#country-filter {
+    height: 10em;
+    width: 80%;
+    margin-right: 0;
+    align-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+/* Creates scroll list for the countries */
+#country-list {
+    height: 30em;
+    width: 80%;
+    margin-right: 0;
+    overflow-y: scroll;
+    align-content: center;
+}
+
+/* 
+    DETAILS-CONTAINER (CENTER COLUMN) LAYOUT --------------------------------------------
+*/
+
+
+
+/* 
+    COUNTRY-PHOTO-CONTAINER (RIGHT COLUMN) LAYOUT ---------------------------------------
+*/
