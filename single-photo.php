@@ -1,6 +1,6 @@
-<?php require_once 'config.inc.php'; ?>
+<?php 
 
-<?php
+require_once 'config.inc.php';
 
 $conn = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -34,23 +34,10 @@ else{
 }
 
 
-
+require "header.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/filter-list.css">
-</head>
-
-<header>
-    <h1>COMP 3512 Assignment 2</h1>
-</header>
-
-<body>
+<main>
     <div id='photo'>
 
 <!-- Make sure to add database reference location when hosted -->
@@ -84,5 +71,6 @@ else{
 
         </div>
     </div>
-</body>
-</html>
+</main>
+
+<?php require "footer.php" ?>
