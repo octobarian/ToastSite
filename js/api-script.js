@@ -62,6 +62,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 })
 
+//-----LOCAL STORAGE FETCH FUNCTIONS--------------------------------------------------------------------------------------
+
+function getCountry() {
+    return localStorage.getItem('Countries');
+}
+
+function getCity() {
+    return localStorage.getItem('Cities');
+}
+
 //-----COUNTRY PAGE FUNCTIONS--------------------------------------------------------------------------------------
 
 //Populate Countries On Initial Country Page Load
