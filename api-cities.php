@@ -1,24 +1,37 @@
-<?php
+<?php require_once 'config.inc.php'; ?>
+<?php 
 
-require_once('config.inc.php');
+ $conn = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
-
-if (isset($_GET['cityCode'])) {
-  $cityCode = $_GET['cityCode'];
-  $sql = "select * from cities where CityCode = $cityCode";
-} else {
-  $sql = "select * from cities";
+if($conn->connect_error){
+    exit('Error connecting to database!');
 }
 
-$json = array();
-
-if ($result = mysqli_query($connection, $sql)) {
-  while ($row = mysqli_fetch_assoc($result)) {
-    $json[] = $row;
-  }
-}
-
-// close the database connection
-mysqli_close($connection);
-echo json_encode($json);
+$iso = '';
+ $sql = "SELECT * FROM cities WHERE CountryCodeISO=?";
+ $stmt = mysqli_stmt_init($conn);
+ if(!mysqli_stmt_prepare($stmt, $sql)){
+     //statment not allowed to prevent injection attacks
+     header("Location: ../index.php?error=sqlerror");
+     exit();
+ }
+ else{
+    if ($iso != null){
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $iso);
+    }else{
+        $sql = "SELECT * FROM cities";
+       mysqli_stmt_prepare($stmt, $sql);
+     
+    }
+    
+    mysqli_stmt_execute($stmt);
+     $result= mysqli_stmt_get_result($stmt);
+     while ($row = $result->fetch_assoc()){
+        $json[]=$row;
+    }
+   
+ }
+ echo json_encode($json);
+ mysqli_close($conn);
+?>
