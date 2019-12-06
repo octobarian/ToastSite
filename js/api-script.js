@@ -105,3 +105,5 @@ function loadCities(selectedCountry) {
 function getCountryDetails(selectedCountry) {
 
 }
+
+
