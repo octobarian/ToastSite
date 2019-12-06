@@ -33,12 +33,13 @@ else{
     mysqli_stmt_execute($stmt);
     $image = mysqli_stmt_get_result($stmt);
 
-    
+    $imageRow=mysqli_fetch_assoc($image);
 }
 
 $userFind = "SELECT * FROM users WHERE UserID=?";
 
 $stmt = mysqli_stmt_init($conn);
+
 
 if(!mysqli_stmt_prepare($stmt, $userFind)){
     header("Location: ../index.php?error=sqlerror");
@@ -48,15 +49,15 @@ else{
     if($id != null){
         mysqli_stmt_prepare($stmt, $userFind);
         //Finds "s"<string> and replaces it with variable $id
-        mysqli_stmt_bind_param($stmt, "i", $image['UserID']);
+        mysqli_stmt_bind_param($stmt, "s", $imageRow['UserID']);
     }
     else{
         header("Location: //index.php?error=invalidImage");
     }
 
+    mysqli_stmt_execute($stmt);
     $user = mysqli_stmt_get_result($stmt);
-
-    echo $user;
+    $userRow = mysqli_fetch_assoc($user);
 }
 
 require "header.php";
@@ -67,11 +68,11 @@ require "header.php";
 
 <!-- Make sure to add database reference location when hosted -->
 
-        <img src="<?=$image['Path']?>">
+        <img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/large1024/<?=$imageRow['Path']?>">
     </div>
     <div id="photoInfo">
         <div id="photoTitle">
-            <?= $image['Title'] ?>
+            <?= $imageRow['Title'] ?>
         </div>
         <div id="userName">
             
@@ -87,7 +88,7 @@ require "header.php";
 
     <div class="tripleOption">
         <div id="desc">
-            <?= $image['Description']?>
+            <?= $imageRow['Description']?>
         </div>
         <div id="details">
 
