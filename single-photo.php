@@ -3,6 +3,7 @@
 require_once 'config.inc.php';
 require 'includes/dbh.inc.php';
 
+require 'includes/dbh.inc.php';
 //--------IMAGE FETCH-----------------------------------------------------------
 
 if($conn->connect_error){
