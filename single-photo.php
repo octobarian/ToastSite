@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 require 'includes/dbh.inc.php';
 //--------IMAGE FETCH-----------------------------------------------------------
 
@@ -137,7 +138,6 @@ require "header.php";
                 <form action="" method="post">
                     <input type="submit" name="fav" value="Add to Favorites">
                 </form>
-            </div>
 
             <div id="bottomInfo">
                 <div class=tripleButton id="buttDesc">
@@ -154,7 +154,7 @@ require "header.php";
                         <?= $imageRow['Description'] ?>
                     </div>
                     <div id="details">
-
+                        <?=$imageRow['Exif']?> <?=$imageRow['ActualCreator']?> <?=$imageRow['CreatorURL']?> <?=$imageRow['Colors']?>
                     </div>
                     <div id="Map">
 
