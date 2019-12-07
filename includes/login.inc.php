@@ -1,6 +1,7 @@
 <?php
 
 if(isset($_POST['login-submit'])){
+    //IF YOU NEED DATABASE $conn, REQUIRE THIS DATABASEHELPER
     require 'dbh.inc.php';
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];
@@ -11,7 +12,7 @@ if(isset($_POST['login-submit'])){
     }
     else{
         //login with a username OR an EMAIL
-        $sql = "SELECT * FROM users WHERE uidUsers=? OR emailUsers=?;";
+        $sql = "SELECT * FROM userslogin WHERE UserName=?;";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
             //statment not allowed to prevent injection attacks
@@ -19,12 +20,13 @@ if(isset($_POST['login-submit'])){
             exit();
         }
         else{
-            mysqli_stmt_bind_param($stmt, "ss", $mailuid, $mailuid);
+            mysqli_stmt_bind_param($stmt, "s", $mailuid);
             mysqli_stmt_execute($stmt);
             $result=mysqli_stmt_get_result($stmt);
             //is there actual data?
             if($row=mysqli_fetch_assoc($result)){
-                $pwdcheck = password_verify($password,$row['pwdUsers']);
+                $passwordHased = password_hash($password, sha_256)
+                $pwdcheck = password_verify($password,$row['Password_sha256']);
                 if($pwdcheck == false){
                     //not the right user
                     header("Location: ../index.php?error=wrongpwd");
@@ -33,8 +35,8 @@ if(isset($_POST['login-submit'])){
                 else if($pwdcheck==true){
                     //password is correct (i use an IF statement so it doesnt default login)
                     session_start();
-                    $_SESSION['userId']=$row['idUsers'];
-                    $_SESSION['userUid']=$row['uidUsers'];
+                    $_SESSION['userId']=$row['UserID'];
+                    $_SESSION['userUid']=$row['UserName'];
                     header("Location: ../index.php?login=success");
                     exit();
                 }
