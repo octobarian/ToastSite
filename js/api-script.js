@@ -9,47 +9,55 @@ document.addEventListener("DOMContentLoaded", function () {
     const countriesAPI = 'http://127.0.0.1/Github/COMP-3512-A2/api-countries.php';
     const citiesAPI = 'http://127.0.0.1/Github/COMP-3512-A2/api-cities.php';
 
+    console.log(typeof (localStorage.getItem('Countries')));
 
-    fetch(countriesAPI, {
-            //Browser error without this line    
-            mode: 'no-cors'
-        })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
+    if (localStorage.getItem('Countries') === null) {
+        fetch(countriesAPI, {
+                //Browser error without this line    
+                mode: 'no-cors'
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
 
-            //Sorts Countries alphabetically by ISO
-            const sortedCountries = data.sort((a, b) => {
-                return a.ISO < b.ISO ? -1 : 1;
+                //Sorts Countries alphabetically by ISO
+                const sortedCountries = data.sort((a, b) => {
+                    return a.ISO < b.ISO ? -1 : 1;
+                });
+
+                localStorage.setItem('Countries', JSON.stringify(sortedCountries));
+            })
+            .catch(function () {
+                console.log("ERROR: api-countries.php fetch");
             });
+    } else {
+        getCountry();
+    }
 
-            localStorage.setItem('Countries', JSON.stringify(sortedCountries));
-        })
-        .catch(function () {
-            console.log("ERROR: api-countries.php fetch");
-        });
+    if (localStorage.getItem('Cities') === null) {
+        fetch(citiesAPI, {
+                //Browser error without this line    
+                mode: 'no-cors'
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
 
-    fetch(citiesAPI, {
-            //Browser error without this line    
-            mode: 'no-cors'
-        })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
+                //Sorts Cities alphabetically by CountryCodeISO
+                const sortedCities = data.sort((a, b) => {
+                    return a.CountryCodeISO < b.CountryCodeISO ? -1 : 1;
+                });
 
-            //Sorts Cities alphabetically by CountryCodeISO
-            const sortedCities = data.sort((a, b) => {
-                return a.CountryCodeISO < b.CountryCodeISO ? -1 : 1;
+                localStorage.setItem('Cities', JSON.stringify(sortedCities));
+            })
+            .catch(function () {
+                console.log("ERROR: api-cities.php fetch");
             });
-
-            localStorage.setItem('Cities', JSON.stringify(sortedCities));
-        })
-        .catch(function () {
-            console.log("ERROR: api-cities.php fetch");
-        });
-
+    } else {
+        getCity();
+    }
 
     loadCountries(getCountry());
 })
@@ -83,10 +91,12 @@ function getCity() {
 
 //Populate Countries On Initial Country Page Load
 function loadCountries(countries) {
+    console.log(countries);
+
     for (let c of countries) {
 
         //Adds the countries into the li element
-        const list = document.querySelector('#country-list');
+        const list = document.querySelector('#country-list form');
         const newListItems = document.createElement('li');
         const newLink = document.createElement('a');
         newListItems.appendChild(newLink);
@@ -94,7 +104,9 @@ function loadCountries(countries) {
         newLink.textContent = c.CountryName;
 
         //Sets attribute to <a href=''> link
-        newLink.setAttribute("href", "single-country.php?");
+        newLink.setAttribute("href", "single-country.php?ISO=" + c.ISO);
+
+        //DO NOT REMOVE, COUNTRIES LIST WON'T WORK WITHOUT
         newLink.setAttribute("id", c.ISO);
     };
 }
@@ -106,7 +118,6 @@ function getSelectedCountry(selectedCountry) {
     });
 
     populateCountryDetails(country);
-
 }
 
 //Shows the country details 
@@ -125,8 +136,7 @@ function populateCountryDetails(c) {
 //Populate cities within country 
 function loadCitiesFromCountry(selectedCountry) {
     getCity().forEach((c) => {
-        if (c.CountryCodeISO == selectedCountry) {
-            console.log(c);
+        if (selectedCountry == c.CountryCodeISO) {
             populateCityList(c);
         }
     })
@@ -143,8 +153,10 @@ function populateCityList(c) {
     newLink.textContent = c.AsciiName;
 
     //Sets attribute to <a href=''> link
-    newLink.setAttribute("href", "single-city.php?");
-    newLink.setAttribute("id", c.CountryCodeISO);
+    newLink.setAttribute("href", "single-city.php?CityCode=" + c.CityCode);
+    newLink.setAttribute("id", c.CityCode);
+
+    console.log(c);
 }
 
 //Gets all of the images for a country

@@ -27,6 +27,9 @@ require_once('config.inc.php');
             </ul>
             <ul id='country-list'>
                 <!-- All of the countries will be populated here as list items -->
+                <form method="GET" action="single-country.php">
+
+                </form>
             </ul>
         </div>
 
@@ -65,7 +68,7 @@ require_once('config.inc.php');
         <div class='country-photo-container'>
             <div id='country-photos'>
                 <!-- All of the images for the selected country -->
-                
+
             </div>
         </div>
 
