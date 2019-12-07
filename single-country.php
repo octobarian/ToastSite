@@ -57,7 +57,7 @@ require_once('config.inc.php');
             <div id='country-city-list'>
                 <!-- List of cities within the selected country-->
                 <ul id='cities-list'>
-    
+
                 </ul>
             </div>
         </div>
@@ -65,6 +65,7 @@ require_once('config.inc.php');
         <div class='country-photo-container'>
             <div id='country-photos'>
                 <!-- All of the images for the selected country -->
+                
             </div>
         </div>
 

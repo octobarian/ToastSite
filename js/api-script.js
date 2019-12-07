@@ -63,7 +63,8 @@ document.querySelector('#country-list').addEventListener('click', (e) => {
     const selectedCountry = e.target.id;
 
     getSelectedCountry(selectedCountry);
-    loadCities(selectedCountry);
+    loadCitiesFromCountry(selectedCountry);
+    getImagesFromSelectedCountry(selectedCountry)
 })
 
 //-----LOCAL STORAGE FETCH FUNCTIONS-------------------------------------------------------------------------------
@@ -105,6 +106,7 @@ function getSelectedCountry(selectedCountry) {
     });
 
     populateCountryDetails(country);
+
 }
 
 //Shows the country details 
@@ -121,7 +123,7 @@ function populateCountryDetails(c) {
 }
 
 //Populate cities within country 
-function loadCities(selectedCountry) {
+function loadCitiesFromCountry(selectedCountry) {
     getCity().forEach((c) => {
         if (c.CountryCodeISO == selectedCountry) {
             console.log(c);
@@ -144,3 +146,15 @@ function populateCityList(c) {
     newLink.setAttribute("href", "single-city.php?");
     newLink.setAttribute("id", c.CountryCodeISO);
 }
+
+//Gets all of the images for a country
+function getImagesFromSelectedCountry() {
+
+}
+
+//Populate the images in the country page
+function populateCountryImages() {
+
+}
+
+//-----CITY PAGE FUNCTIONS----------------------------------------------------------------------------------------
