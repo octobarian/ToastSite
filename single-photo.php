@@ -34,9 +34,9 @@ else{
 
     mysqli_stmt_execute($stmt);
     $image = mysqli_stmt_get_result($stmt);
-
     $imageRow=mysqli_fetch_assoc($image);
 }
+mysqli_stmt_close($stmt);
 
 //--------USER FETCH-----------------------------------------------------------
 
@@ -63,6 +63,7 @@ else{
     $user = mysqli_stmt_get_result($stmt);
     $userRow = mysqli_fetch_assoc($user);
 }
+mysqli_stmt_close($stmt);
 
 //--------COUNTRY FETCH-----------------------------------------------------------
 
@@ -88,6 +89,7 @@ else{
     $country = mysqli_stmt_get_result($stmt);
     $countryRow = mysqli_fetch_assoc($country);
 }
+mysqli_stmt_close($stmt);
 
 //-------CITY FETCH-----------------------------------------------------------
 
@@ -113,6 +115,10 @@ else{
     $city = mysqli_stmt_get_result($stmt);
     $cityRow = mysqli_fetch_assoc($city);
 }
+
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
+
 
 require "header.php";
 ?>
