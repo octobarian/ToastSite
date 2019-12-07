@@ -22,14 +22,29 @@ if(isset($_POST['login-submit'])){
         else{
             mysqli_stmt_bind_param($stmt, "s", $mailuid);
             mysqli_stmt_execute($stmt);
+            //$RESULT = THE STORED PASS
             $result=mysqli_stmt_get_result($stmt);
             //is there actual data?
             if($row=mysqli_fetch_assoc($result)){
-                $passwordHased = password_hash($password, sha_256)
-                $pwdcheck = password_verify($password,$row['Password_sha256']);
+                //$digest = password_hash($password, PASSWORD_BCRYPT, ['cost'  => 12]);
+                if(password_verify($password, $row['Password']) && $mailuid == $row['UserName'])
+                //$digest == $row['Password'])
+                //if($mailuid == $row['UserName'] && $digest == $row['Password'])
+                {
+                    $pwdcheck=true;
+                }
+                else{
+                    $pwdcheck=false;
+                    header("Location: ../index.php?error=wrongpwd1&p=".$row['Password']."&d=".$digest);
+                    exit();
+                }
+                
+                //$passwordHased = password_hash($password, sha_256)
+                //$pwdcheck = password_verify($password,$row['Password_sha256']);
+                
                 if($pwdcheck == false){
                     //not the right user
-                    header("Location: ../index.php?error=wrongpwd");
+                    header("Location: ../index.php?error=wrongpwd1");
                     exit();
                 }
                 else if($pwdcheck==true){
@@ -42,7 +57,7 @@ if(isset($_POST['login-submit'])){
                 }
                 else{
                     //incase of any mistake, just error out
-                    header("Location: ../index.php?error=wrongpwd");
+                    header("Location: ../index.php?error=wrongpwd2");
                     exit();
                 }
             }
@@ -58,3 +73,6 @@ else{
         header("Location: ../index.php");
         exit();
 }
+
+//Digest = $2y$12$iyiYzigJXCqf9yy2w3fCteAkoxCdEZ3l9GYWPD4rRPfAonpOJUcjC
+
