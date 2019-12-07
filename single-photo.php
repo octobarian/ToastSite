@@ -2,9 +2,8 @@
 
 require_once 'config.inc.php';
 
+require 'includes/dbh.inc.php';
 //--------IMAGE FETCH-----------------------------------------------------------
-
-$conn = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 if($conn->connect_error){
     exit('Error connecting to the database');
