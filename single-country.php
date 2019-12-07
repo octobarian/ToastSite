@@ -33,9 +33,32 @@ require_once('config.inc.php');
         <div class='details-container'>
             <div id='country-details'>
                 <!-- All of the data for the selected country -->
+                <section class='details-list-section'>
+                    <label>Area:</label>
+                    <span id='country-area'></span>
+                    <label>Population:</label>
+                    <span id='country-pop'></span>
+                    <label>Capital City:</label>
+                    <span id='country-cap'></span>
+                    <label>Currency Name:</label>
+                    <span id='country-curr-name'></span>
+                    <label>Currency Name:</label>
+                    <span id='country-curr-code'></span>
+                    <label>Domain:</label>
+                    <span id='country-dom'></span>
+                    <label>Languages:</label>
+                    <span id='country-lang'></span>
+                    <label>Neighbours:</label>
+                    <span id='country-neig'></span>
+                    <label>Description:</label>
+                    <span id='country-desc'></span>
+                </section>
             </div>
             <div id='country-city-list'>
                 <!-- List of cities within the selected country-->
+                <ul id='cities-list'>
+    
+                </ul>
             </div>
         </div>
 

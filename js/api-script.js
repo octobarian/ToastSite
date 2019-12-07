@@ -62,6 +62,7 @@ document.querySelector('#country-list').addEventListener('click', (e) => {
     //Returns the ISO of the selected country
     const selectedCountry = e.target.id;
 
+    getSelectedCountry(selectedCountry);
     loadCities(selectedCountry);
 })
 
@@ -82,6 +83,7 @@ function getCity() {
 //Populate Countries On Initial Country Page Load
 function loadCountries(countries) {
     for (let c of countries) {
+
         //Adds the countries into the li element
         const list = document.querySelector('#country-list');
         const newListItems = document.createElement('li');
@@ -96,14 +98,49 @@ function loadCountries(countries) {
     };
 }
 
-//Populate Cities once a country is selected 
+//Gets country object for the country that is selected
+function getSelectedCountry(selectedCountry) {
+    const country = getCountry().find((c) => {
+        return c.ISO == selectedCountry;
+    });
+
+    populateCountryDetails(country);
+}
+
+//Shows the country details 
+function populateCountryDetails(c) {
+    document.querySelector('#country-area').textContent = c.Area;
+    document.querySelector('#country-pop').textContent = c.Population;
+    document.querySelector('#country-cap').textContent = c.Capital;
+    document.querySelector('#country-curr-name').textContent = c.CurrencyName;
+    document.querySelector('#country-curr-code').textContent = c.CurrencyCode;
+    document.querySelector('#country-dom').textContent = c.TopLevelDomain;
+    document.querySelector('#country-lang').textContent = c.Languages;
+    document.querySelector('#country-neig').textContent = c.Neighbours;
+    document.querySelector('#country-desc').textContent = c.CountryDescription;
+}
+
+//Populate cities within country 
 function loadCities(selectedCountry) {
-    console.log(selectedCountry);
+    getCity().forEach((c) => {
+        if (c.CountryCodeISO == selectedCountry) {
+            console.log(c);
+            populateCityList(c);
+        }
+    })
 }
 
-//Show country details for the country that is selected
-function getCountryDetails(selectedCountry) {
+//Populates the list of cities, as links, in the country page
+function populateCityList(c) {
+    //Adds the cities into the li element
+    const list = document.querySelector('#cities-list');
+    const newListItems = document.createElement('li');
+    const newLink = document.createElement('a');
+    newListItems.appendChild(newLink);
+    list.appendChild(newListItems);
+    newLink.textContent = c.AsciiName;
 
+    //Sets attribute to <a href=''> link
+    newLink.setAttribute("href", "single-city.php?");
+    newLink.setAttribute("id", c.CountryCodeISO);
 }
-
-
