@@ -52,6 +52,7 @@ if(!mysqli_stmt_prepare($stmt, $userFind)){
 else{
     if($id != null){
         mysqli_stmt_prepare($stmt, $userFind);
+        //Finds "s"<string> and replaces it with variable $id
         mysqli_stmt_bind_param($stmt, "s", $imageRow['UserID']);
     }
     else{
@@ -77,10 +78,11 @@ if(!mysqli_stmt_prepare($stmt, $userFind)){
 else{
     if($id != null){
         mysqli_stmt_prepare($stmt, $countryFind);
+        //Finds "s"<string> and replaces it with variable $id
         mysqli_stmt_bind_param($stmt, "s", $imageRow['CountryCodeISO']);
     }
     else{
-        header("Location: //index.php?error=invalidCountry");
+        header("Location: //index.php?error=invalidUser");
     }
 
     mysqli_stmt_execute($stmt);
@@ -102,10 +104,11 @@ if(!mysqli_stmt_prepare($stmt, $cityFind)){
 else{
     if($id != null){
         mysqli_stmt_prepare($stmt, $cityFind);
+        //Finds "s"<string> and replaces it with variable $id
         mysqli_stmt_bind_param($stmt, "s", $imageRow['CityCode']);
     }
     else{
-        header("Location: //index.php?error=invalidCity");
+        header("Location: //index.php?error=invalidUser");
     }
 
     mysqli_stmt_execute($stmt);
@@ -120,37 +123,52 @@ mysqli_close($conn);
 require "header.php";
 ?>
 
+<link rel="stylesheet" href="css/singlephoto.css">
+
 <main>
+    <div id='container'>
     <div id='photo'>
+
+<!-- Make sure to add database reference location when hosted -->
+
         <img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/large1024/<?=$imageRow['Path']?>">
     </div>
+
+    <div id='infoContainer'>
     <div id="photoInfo">
         <div id="photoTitle">
-            <?= $imageRow['Title'] ?>
+            <h1><?= $imageRow['Title'] ?></h1>
         </div>
         <div id="userName">
-            <?=$userRow['FirstName']?> <?=$userRow['LastName']?>
+           <h4> <?=$userRow['FirstName']?> <?=$userRow['LastName']?></h4>
         </div>
         <div id="location">
-            <?=$countryRow['CountryName']?>, <?=$cityRow['AsciiName']?>
+           <h4> <?=$countryRow['CountryName']?>, <?=$cityRow['AsciiName']?></h4>
         </div>
     </div>
 
     <div id="favorites">
-
+        <p>Add to Favorite</p>
     </div>
 
-    <div class="tripleOption">
-        <div id="desc">
-            <?= $imageRow['Description']?>
-        </div>
-        <div id="details">
+    <div id="bottomInfo">
+        <div class=tripleButton id="buttDesc"><p>Description</p></div>
+        <div class=tripleButton id="buttDet"><p>Details</p></div>
+        <div class=tripleButton id="buttMap"><p>Map</p></div>
+        <div class="tripleOption">
+            <div id="desc">
+                <?= $imageRow['Description']?>
+            </div>
+            <div id="details">
 
-        </div>
-        <div id="Map">
+            </div>
+            <div id="Map">
 
+            </div>
         </div>
     </div>
+    </div>
+</div>
 </main>
 
 <?php require "footer.php" ?>
