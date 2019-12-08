@@ -1,6 +1,11 @@
 <?php
 
-require_once('config.inc.php');
+//require 'config.inc.php';
+require 'includes/dbh.inc.php';
+
+if ($conn->connect_error) {
+    exit("Error connecting to the database");
+}
 
 ?>
 
@@ -27,7 +32,7 @@ require_once('config.inc.php');
             </ul>
             <ul id='country-list'>
                 <!-- All of the countries will be populated here as list items -->
-                <form method="GET" action="single-country.php">
+                <form method="GET" action="http://localhost/Github/COMP-3512-A2/single-country.php?">
 
                 </form>
             </ul>
@@ -36,7 +41,8 @@ require_once('config.inc.php');
         <div class='details-container'>
             <div id='country-details'>
                 <!-- All of the data for the selected country -->
-                <section class='details-list-section'>
+                <!-- FORMAT
+                    <section class='details-list-section'>
                     <label>Area:</label>
                     <span id='country-area'></span>
                     <label>Population:</label>
@@ -55,7 +61,7 @@ require_once('config.inc.php');
                     <span id='country-neig'></span>
                     <label>Description:</label>
                     <span id='country-desc'></span>
-                </section>
+                </section>-->
             </div>
             <div id='country-city-list'>
                 <!-- List of cities within the selected country-->

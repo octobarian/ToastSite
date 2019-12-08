@@ -16,8 +16,8 @@ document.querySelector('#country-list').addEventListener('click', (e) => {
     const selectedCountry = e.target.id;
 
     getSelectedCountry(selectedCountry);
-    loadCitiesFromCountry(selectedCountry);
-    getImagesFromSelectedCountry(selectedCountry)
+    //loadCitiesFromCountry(selectedCountry);
+    //getImagesFromSelectedCountry(selectedCountry)
 })
 
 //-----LOCAL STORAGE FETCH FUNCTIONS-------------------------------------------------------------------------------
@@ -104,56 +104,57 @@ function getSelectedCountry(selectedCountry) {
         return c.ISO == selectedCountry;
     });
 
-    populateCountryDetails(country);
+    //COUNTRY DETAILS POPULATION IS THROUGH PHP
+    //populateCountryDetails(country);
 }
 
-//Shows the country details 
-function populateCountryDetails(c) {
-    document.querySelector('#country-area').textContent = c.Area;
-    document.querySelector('#country-pop').textContent = c.Population;
-    document.querySelector('#country-cap').textContent = c.Capital;
-    document.querySelector('#country-curr-name').textContent = c.CurrencyName;
-    document.querySelector('#country-curr-code').textContent = c.CurrencyCode;
-    document.querySelector('#country-dom').textContent = c.TopLevelDomain;
-    document.querySelector('#country-lang').textContent = c.Languages;
-    document.querySelector('#country-neig').textContent = c.Neighbours;
-    document.querySelector('#country-desc').textContent = c.CountryDescription;
-}
+// //Shows the country details 
+// function populateCountryDetails(c) {
+//     document.querySelector('#country-area').textContent = c.Area;
+//     document.querySelector('#country-pop').textContent = c.Population;
+//     document.querySelector('#country-cap').textContent = c.Capital;
+//     document.querySelector('#country-curr-name').textContent = c.CurrencyName;
+//     document.querySelector('#country-curr-code').textContent = c.CurrencyCode;
+//     document.querySelector('#country-dom').textContent = c.TopLevelDomain;
+//     document.querySelector('#country-lang').textContent = c.Languages;
+//     document.querySelector('#country-neig').textContent = c.Neighbours;
+//     document.querySelector('#country-desc').textContent = c.CountryDescription;
+// }
 
-//Populate cities within country 
-function loadCitiesFromCountry(selectedCountry) {
-    getCity().forEach((c) => {
-        if (selectedCountry == c.CountryCodeISO) {
-            populateCityList(c);
-        }
-    })
-}
+// //Populate cities within country 
+// function loadCitiesFromCountry(selectedCountry) {
+//     getCity().forEach((c) => {
+//         if (selectedCountry == c.CountryCodeISO) {
+//             populateCityList(c);
+//         }
+//     })
+// }
 
-//Populates the list of cities, as links, in the country page
-function populateCityList(c) {
-    //Adds the cities into the li element
-    const list = document.querySelector('#cities-list');
-    const newListItems = document.createElement('li');
-    const newLink = document.createElement('a');
-    newListItems.appendChild(newLink);
-    list.appendChild(newListItems);
-    newLink.textContent = c.AsciiName;
+// //Populates the list of cities, as links, in the country page
+// function populateCityList(c) {
+//     //Adds the cities into the li element
+//     const list = document.querySelector('#cities-list');
+//     const newListItems = document.createElement('li');
+//     const newLink = document.createElement('a');
+//     newListItems.appendChild(newLink);
+//     list.appendChild(newListItems);
+//     newLink.textContent = c.AsciiName;
 
-    //Sets attribute to <a href=''> link
-    newLink.setAttribute("href", "single-city.php?CityCode=" + c.CityCode);
-    newLink.setAttribute("id", c.CityCode);
+//     //Sets attribute to <a href=''> link
+//     newLink.setAttribute("href", "single-city.php?CityCode=" + c.CityCode);
+//     newLink.setAttribute("id", c.CityCode);
 
-    console.log(c);
-}
+//     console.log(c);
+// }
 
-//Gets all of the images for a country
-function getImagesFromSelectedCountry() {
+// //Gets all of the images for a country
+// function getImagesFromSelectedCountry() {
 
-}
+// }
 
-//Populate the images in the country page
-function populateCountryImages() {
+// //Populate the images in the country page
+// function populateCountryImages() {
 
-}
+// }
 
 //-----CITY PAGE FUNCTIONS----------------------------------------------------------------------------------------
