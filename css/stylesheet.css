@@ -64,6 +64,34 @@ main {
     margin: 0 auto;
 }
 
+.homebox{
+    justify-content: center;
+    justify-items: center;
+    display:grid;
+    grid-template-areas:
+    "uinfo search"
+    "favourites recommend";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.homebox .uinfo{
+    grid-area: uinfo;
+
+}
+.homebox .search{
+    grid-area: search;
+
+}
+.homebox .recommend{
+    grid-area: recommend;
+
+}
+.homebox .favourites{
+    grid-area: favourites;
+
+}
+
 .section-default{
     display: table-cell;
     vertical-align: middle;
@@ -94,4 +122,13 @@ button[type=submit], .btn {
 
  button[type=submit]:hover, .btn:hover {
     background-color: var(--colour-special2);
+  }
+
+  .hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: url("../img/herotoast.jpg");
+  }
+
+  .hero-text {
+    text-align: center;
   }

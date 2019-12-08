@@ -6,6 +6,7 @@
     <main>
         <div class="wrapper-main">
 <!--Insert your code for this page inside the mains-->
+<h1>ABOUT PAGE</h1>
         </div>
     </main>
 

@@ -51,7 +51,7 @@ if(isset($_POST['login-submit'])){
                     //password is correct (i use an IF statement so it doesnt default login)
                     session_start();
                     $_SESSION['userId']=$row['UserID'];
-                    $_SESSION['userUid']=$row['UserName'];
+                    $_SESSION['email']=$row['UserName'];
                     header("Location: ../index.php?login=success");
                     exit();
                 }
