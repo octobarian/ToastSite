@@ -6,12 +6,12 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     //Links are just local to test for now
-    const countriesAPI = 'http://127.0.0.1/Github/COMP-3512-A2/api-countries.php';
-    const citiesAPI = 'http://127.0.0.1/Github/COMP-3512-A2/api-cities.php';
+    const countriesAPI = 'http://localhost/Github/COMP-3512-A2/api-countries.php';
+    const citiesAPI = 'http://localhost/Github/COMP-3512-A2/api-cities.php';
 
-    console.log(typeof (localStorage.getItem('Countries')));
+    console.log(typeof (getCountry()));
 
-    if (localStorage.getItem('Countries') === null) {
+    if (getCountry() == null) {
         fetch(countriesAPI, {
                 //Browser error without this line    
                 mode: 'no-cors'
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 localStorage.setItem('Countries', JSON.stringify(sortedCountries));
+                console.log("Fetch Countries");
             })
             .catch(function () {
                 console.log("ERROR: api-countries.php fetch");
@@ -35,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         getCountry();
     }
 
-    if (localStorage.getItem('Cities') === null) {
+    if (localStorage.getItem('Cities') == null) {
         fetch(citiesAPI, {
                 //Browser error without this line    
                 mode: 'no-cors'
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 localStorage.setItem('Cities', JSON.stringify(sortedCities));
+                console.log("Fetch Cities")
             })
             .catch(function () {
                 console.log("ERROR: api-cities.php fetch");
@@ -58,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         getCity();
     }
-
     loadCountries(getCountry());
 })
 
