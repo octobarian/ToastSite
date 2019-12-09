@@ -37,7 +37,7 @@ function populateCountryDetails($c)
 </head>
 
 <header>
-    <h1>COMP 3512 Assignment 2</h1>
+    <h1>COMP 3512 Assignment 2 - Country Page</h1>
 </header>
 
 <body>
