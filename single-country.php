@@ -85,9 +85,13 @@ require 'includes/single-country.inc.php';
             <div id='country-photos'>
                 <!-- All of the images for the selected country -->
                 <?php
-                while ($photoRow = mysqli_fetch_assoc($photo)) {
-                    //echo "<li>" . $photoRow['ImageID'] . ", " . $photoRow['Title'] . "</li>";
-                    echo "<a href='single-photo.php?ImageID=" . $photoRow['ImageID'] . "'>" . "<img src=https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/" . $photoRow['Path'] . "></img></a>";
+                if ($photoRow != null) {
+                    while ($photoRow = mysqli_fetch_assoc($photo)) {
+                        //echo "<li>" . $photoRow['ImageID'] . ", " . $photoRow['Title'] . "</li>";
+                        echo "<a href='single-photo.php?ImageID=" . $photoRow['ImageID'] . "'>" . "<img src=https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/" . $photoRow['Path'] . "></img></a>";
+                    }
+                } else {
+                    echo $countryRow['CountryName'] . " Has No Photos To Display";
                 }
                 ?>
             </div>
