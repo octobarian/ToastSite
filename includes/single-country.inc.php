@@ -44,7 +44,7 @@ if (!mysqli_stmt_prepare($stmt, $listCities)) {
         mysqli_stmt_prepare($stmt, $listCities);
         mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
     } else {
-        header("Location: //index.php?error=cityError");
+        header("Location: //index.php?error=countryError-A");
     }
 
     mysqli_stmt_execute($stmt);
@@ -66,7 +66,7 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
         mysqli_stmt_prepare($stmt, $photoList);
         mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
     } else {
-        header("Location: //index.php?error=cityError");
+        header("Location: //index.php?error=countryError-B");
     }
 
     mysqli_stmt_execute($stmt);
@@ -74,26 +74,7 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
     $photoRow = mysqli_fetch_assoc($photo);
 }
 
-function populateCountryDetails($c)
-{
-    echo "<section class='details-list-section'>";
-    echo "<label>Area:</label>";
-    echo "<span id='country-area'>" . $c['Area'] . "</span>";
-    echo "<label>Population:</label>";
-    echo "<span id='country-pop'>" . $c['Population'] . "</span>";
-    echo "<label>Capital City:</label>";
-    echo "<span id='country-cap'>" . $c['Capital'] . "</span>";
-    echo "<label>Currency Name:</label>";
-    echo "<span id='country-curr-name'>" . $c['CurrencyName'] . "</span>";
-    echo "<label>Currency Code:</label>";
-    echo "<span id='country-curr-code'>" . $c['CurrencyCode'] . "</span>";
-    echo "<label>Domain:</label>";
-    echo "<span id='country-dom'>" . $c['TopLevelDomain'] . "</span>";
-    echo "<label>Languages:</label>";
-    echo "<span id='country-lang'>" . $c['Languages'] . "</span>";
-    echo "<label>Neighbours:</label?";
-    echo "<span id='country-neig'>" . $c['Neighbours'] . "</span>";
-    echo "<label>Description:</label>";
-    echo "<span id='country-desc'>" . $c['CountryDescription'] . "</span>";
-    echo "</section>";
-}
+mysqli_stmt_close($stmt);
+
+//Close the connection
+mysqli_close($conn);
