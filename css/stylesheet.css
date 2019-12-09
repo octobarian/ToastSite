@@ -77,6 +77,7 @@ main {
 
 .homebox .uinfo{
     grid-area: uinfo;
+    background-color: var(--colour-dark);
 
 }
 .homebox .search{
@@ -85,6 +86,7 @@ main {
 }
 .homebox .recommend{
     grid-area: recommend;
+    background-color: var(--colour-dark);
 
 }
 .homebox .favourites{
