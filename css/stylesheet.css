@@ -75,6 +75,26 @@ main {
     grid-template-rows: 1fr 1fr;
 }
 
+.about{
+    justify-content: center;
+    justify-items: center;
+    display:grid;
+    grid-template-areas:
+    "box box"
+    "box box";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.homebox .box{
+    grid-area: box;
+    
+}
+
+.box img{
+    max-width: 140px;
+}
+
 .homebox .uinfo{
     grid-area: uinfo;
     background-color: var(--colour-dark);
@@ -134,3 +154,4 @@ button[type=submit], .btn {
   .hero-text {
     text-align: center;
   }
+
