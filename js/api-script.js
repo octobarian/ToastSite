@@ -12,12 +12,16 @@ document.querySelector('#country-list').addEventListener('click', (e) => {
     //Prevents console.log from blipping 
     e.preventDefault();
 
-    //Returns the ISO of the selected country
-    const selectedCountry = e.target.id;
+    window.location.href = "single-country.php" + e.target.search;
 
-    getSelectedCountry(selectedCountry);
+    console.log(window.location.href);
+
+    //Returns the ISO of the selected country
+    //const selectedCountry = e.target.id;
+
+    //getSelectedCountry(selectedCountry);
     //loadCitiesFromCountry(selectedCountry);
-    //getImagesFromSelectedCountry(selectedCountry)
+    //getImagesFromSelectedCountry(selectedCountry);
 })
 
 //-----LOCAL STORAGE FETCH FUNCTIONS-------------------------------------------------------------------------------
