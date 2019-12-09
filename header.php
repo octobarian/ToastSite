@@ -21,8 +21,8 @@
             <ul>
                 <li><a href="index.php">home</a></li>
                 <li><a href="about.php">about</a></li>
-                <li><a href="image.php">image</a></li>
-                <li><a href="#">something</a></li>
+                <li><a href="single-photo.php">Single Image</a></li>
+                <li><a href="single-country.php">Single country</a></li>
             </ul>
             <div class="header-login">
             <?php
