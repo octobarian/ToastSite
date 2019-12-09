@@ -44,7 +44,7 @@ if (!mysqli_stmt_prepare($stmt, $listCities)) {
         mysqli_stmt_prepare($stmt, $listCities);
         mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
     } else {
-        header("Location: //index.php?error=cityError");
+        header("Location: //index.php?error=countryError-A");
     }
 
     mysqli_stmt_execute($stmt);
@@ -66,13 +66,15 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
         mysqli_stmt_prepare($stmt, $photoList);
         mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
     } else {
-        header("Location: //index.php?error=cityError");
+        header("Location: //index.php?error=countryError-B");
     }
 
     mysqli_stmt_execute($stmt);
     $photo = mysqli_stmt_get_result($stmt);
     $photoRow = mysqli_fetch_assoc($photo);
 }
+
+mysqli_stmt_close($stmt);
 
 //Close the connection
 mysqli_close($conn);
