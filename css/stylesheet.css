@@ -80,15 +80,12 @@ main {
     justify-items: center;
     display:grid;
     grid-template-areas:
-    "box box"
-    "box box";
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    "box box box box";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .homebox .box{
     grid-area: box;
-    
 }
 
 .box img{
