@@ -73,3 +73,6 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
     $photo = mysqli_stmt_get_result($stmt);
     $photoRow = mysqli_fetch_assoc($photo);
 }
+
+//Close the connection
+mysqli_close($conn);
