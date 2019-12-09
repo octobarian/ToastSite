@@ -1,5 +1,5 @@
 <div class="hero-image">
-  <div class="hero-text">
+  <div class="hero-text"><h1>TOAST</h1><p>You Are Logged Out</p>
   </div>
 </div>
 <div class = "search">

@@ -11,7 +11,7 @@
             }
             else{
                 //Whatever we want to happen when users are logged out
-                echo'<p class="login-status">You are logged OUT!</p>';
+                //echo'<p class="login-status">You are logged OUT!</p>';
                 include "includes/loggedout.inc.php";
             }
         ?>
