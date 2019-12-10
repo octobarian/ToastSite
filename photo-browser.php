@@ -73,15 +73,15 @@ mysqli_stmt_close($stmt);
 
 require "header.php";
 ?>
-
+<link rel="stylesheet" type="text/css" href="css/photo-browser.css">
 <main>
     <div id="container">
         <div id="photoCountryFilter">
             <!--Search photos by title-->
             <?php include 'includes/homesearch.inc.php'?>
             <!--Search photos by country-->
-            <form action="photo-browser.php" method="post">
-                <select name="countrySearch" id="photoCountrySelect">
+            <form action="photo-browser.php" method="get">
+                <select name="countryISO" id="photoCountrySelect">
                     <?php
            //https://riptutorial.com/php/example/9382/loop-through-mysqli-results
          
@@ -94,15 +94,15 @@ require "header.php";
             ?>
 
                 </select>
-                <button type="submit" value="Search Country">
+                <button type="submit" value="Search Country">Search Country</button>
             </form>
             <!--Search photos by city-->
-            <form action="photo-browser.php" method="post">
-                <select name="citySearch" id="photoCitySelect">
+            <form action="photo-browser.php" method="get">
+                <select name="cityCode" id="photoCitySelect">
                     <?php
         
                 while($row = mysqli_fetch_assoc($city)){
-                    $value = $row['CityCode' ];
+                    $value = $row['CityCode'];
                     $cityName = $row['AsciiName'];
                     echo '<option value="' . $value . '">' . $cityName . '</option>';
                    
@@ -110,22 +110,34 @@ require "header.php";
             ?>
 
                 </select>
-                <button type="submit" value="Search City">
+                <button type="submit" value="Search City">Search City</button>
             </form>
         </div>
 
-        <div id="browse/searchResult">
+
+        <div id="browsesearchResult">
+
             <?php
-                if(isset($_POST['countrySearch'])){ //If searching by country
-                    $countryPostValue = $_POST['countrySearch'];
+                if(!isset($_GET['countryISO'])&&!isset($_GET['cityCode'])&&!isset($_GET['titleSearch'])){
+                    echo '<div class="bodyTitle"><h1>Browse Photos or Search Photos</h1></div>';
+                    echo '<div id="resultGrid">';
+                    while ($row = mysqli_fetch_assoc($image)){
+                        echo '<div class="imageBox"><a href="single-photo.php?ImageID=' .$row['ImageID'] . '">';
+                        echo '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/' . $row['Path'] . '" />';
+                        echo '</a></div>';
+                    }
+                    echo '</div>';
+                }
+                if(isset($_GET['countryISO'])){ //If searching by country
+                    $countryPostValue = $_GET['countryISO'];
                     $isCountry = 1;
 //------FETCH PHOTOS THAT MATCHES CLICKED COUNTRY---------------------------------
                     $findPhotoSQL = "SELECT * FROM imagedetails WHERE CountryCodeISO = ? ORDER BY Title";
                     $searchedImage = photoSQLSearch($findPhotoSQL, $conn, $countryPostValue);
                     displayPhotos($searchedImage, $isCountry, $countryPostValue);
         
-                }elseif(isset($_POST['citySearch'])){ //If searching by city
-                    $cityPostValue = $_POST['citySearch'];
+                }elseif(isset($_GET['cityCode'])){ //If searching by city
+                    $cityPostValue = $_GET['cityCode'];
                     $isCountry = 0;
 
     //-----FETCH PHOTOS THAT MATCHES CLICKED CITY---------------------------------
@@ -133,11 +145,11 @@ require "header.php";
                     $searchedImage = photoSQLSearch($findPhotoSQL, $conn, $cityPostValue);
                     displayPhotos($searchedImage, $isCountry, $cityPostValue);
     
-                }elseif (isset($_POST['titleSearch'])){
-                    $titleValue = $_POST['titleSearch'];
+                }elseif (isset($_GET['titleSearch'])){
+                    $titleValue = $_GET['titleSearch'];
                     $isCountry = 2;
                     if ($titleValue == ""){
-                        echo '<h1>Field is blank. Search for photo</h1>';
+                        echo '<div class="bodyTitle"><h1>Field is blank. Search for photo</h1></div>';
                     }else{  
     //---------FETCH PHOTOS THAT MATCHES TITLE--------------------------------
     //https://dba.stackexchange.com/questions/203206/find-if-any-of-the-rows-partially-match-a-string
@@ -146,23 +158,25 @@ require "header.php";
                         displayPhotos($searchedImage, $isCountry, $titleValue);
                     }
                 }else{
-                    echo  '<h1> Please search for photos by title, country, or city! </h1>';
+                    
                 }
                 
 
                 function displayPhotos($searchedImage, $isCountry, $searchValue){
-                    echo '<h1>Search Result</h1>';
+                    echo '<div class="bodyTitle"><h1>Search Result</h1></div>';
+                    echo '<div id="resultRow">';
+                   
                     while ($row = mysqli_fetch_assoc($searchedImage)){
-                        echo '<div>';
+                        echo '<div class="imageBox">';
                         echo '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/' . $row['Path'] . '" />';
-                        echo $row['Title'];
+                        echo '<div id="photoTitle"><h3>'.$row['Title'].'</h3></div>';
             
-                        echo '<form action="single-photo.php" method="get">';
+                        echo '<div><form id="viewButton" action="single-photo.php" method="get">';
                         echo '<input type="hidden" name="ImageID" value="' . $row['ImageID'] . '">';
-                        echo '<button type="submit" name="viewImg" value="View">';
-                        echo '</form>';
+                        echo '<button type="submit" name="viewImg" value="View">View Image</button>';
+                        echo '</form></div>';
 
-                        echo '<form action="photo-browser.php" method="post">';
+                        echo '<div><form id="favoriteButton" action="photo-browser.php" method="post">';
                         echo '<input type="hidden" name="path" value="' . $row['Path']. '">';
                         if ($isCountry == 1){
                             echo '<input type="hidden" name="countrySearch" value="' . $searchValue . '">';
@@ -171,10 +185,11 @@ require "header.php";
                         }elseif ($isCountry == 2){
                             echo '<input type="hidden" name="titleSearch value="' . $searchValue . '">';
                         } 
-                        echo '<button type="submit" name="fav" value="Add to Favorites">';
-                        echo '</form>';
+                        echo '<button type="submit" name="fav" value="Add to Favorites">Add to Favorites</button>';
+                        echo '</form></div>';
                         echo '</div>';
                     }
+                    echo '</div>';
                 }
                 
                 function photoSQLSearch($sql, $conn, $searchValue){
@@ -203,12 +218,10 @@ require "header.php";
 
      if (isset($_POST['fav'])) {
         if (isset($_SESSION['favPhotos'])) {
-        
-            array_push($_SESSION['favPhotos'], $_POST['Path']);
-            
+            array_push($_SESSION['favPhotos'], $_POST['path']);
         } else {
            
-            $_SESSION['favPhotos'] = array($_POST['Path']);
+            $_SESSION['favPhotos'] = array($_POST['path']);
         }
     }
    
