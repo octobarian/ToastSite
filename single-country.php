@@ -10,46 +10,61 @@ function populateCountryDetails($c)
 
     echo "<label>Area:</label>";
     echo "<span id='country-area'>" . $c['Area'] . "</span>";
-
     echo "<label>Population:</label>";
     echo "<span id='country-pop'>" . $c['Population'] . "</span>";
-
     echo "<label>Capital City:</label>";
     echo "<span id='country-cap'>" . $c['Capital'] . "</span>";
-
     echo "<label>Currency Name:</label>";
     echo "<span id='country-curr-name'>" . $c['CurrencyName'] . "</span>";
-
     echo "<label>Currency Code:</label>";
     echo "<span id='country-curr-code'>" . $c['CurrencyCode'] . "</span>";
-
     echo "<label>Domain:</label>";
     echo "<span id='country-dom'>" . $c['TopLevelDomain'] . "</span>";
-
     echo "<label>Languages:</label>";
     echo "<span id='country-lang'>" . $c['Languages'] . "</span>";
-
     echo "<label>Neighbours:</label>";
     echo "<span id='country-neig'>" . $c['Neighbours'] . "</span>";
-
     echo "<label>Description:</label>";
     echo "<span id='country-desc'>" . $c['CountryDescription'] . "</span>";
-
     echo "</section>";
 }
 
-echo "<h1> Languages </h1><br>";
-$languages = explode(",", $countryRow['Languages']);
-foreach ($languages as $value) {
-    echo "<li>" . $value . "<li>";
-}
+// echo "<h1> Languages </h1>";
+// $lang = explode(",", $countryRow['Languages']);
+// foreach ($lang as $value) {
+//     echo "<li>" . $value . "</li>";
+// }
 
-echo "<h1> Neighbours </h1><br>";
+// echo "<h1> Neighbours </h1>";
+// $neighbours = explode(",", $countryRow['Neighbours']);
 
-$neighbours = explode(",", $countryRow['Neighbours']);
-foreach ($neighbours as $value) {
-    echo "<li>" . $value . "</li>";
-}
+// //Only goes through if neighbours exist
+// if ($neighbours != null) {
+
+//     $countries = "SELECT CountryName FROM countries WHERE ISO=?";
+//     $stmt = mysqli_stmt_init($conn);
+
+//     foreach ($neighbours as $val) {
+
+//         if (!mysqli_stmt_prepare($stmt, $countries)) {
+//             header("Location: ../index.php?error=neighbour-sql-error-1");
+//             exit();
+//         } else {
+//             if ($selectedCountry != null) {
+//                 mysqli_stmt_prepare($stmt, $countries);
+//                 mysqli_stmt_bind_param($stmt, "s", $val);
+//             } else {
+//                 header("Location: //index.php?error=selectedCountryError");
+//             }
+
+//             mysqli_stmt_execute($stmt);
+//             $count = mysqli_stmt_get_result($stmt);
+//         }
+//         echo "<li>" . $count . "</li>";
+//     }
+// } else {
+//     echo "<li>THERE ARE NO NEIGHBOURS</li>";
+// }
 
 ?>
 
