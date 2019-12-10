@@ -91,6 +91,10 @@ main {
     font-size: large;
 }
 
+.wrapper-main .search{
+    margin:auto;
+}
+
 .homebox .box{
     grid-area: box;
 }
@@ -102,21 +106,27 @@ main {
 .homebox .uinfo{
     grid-area: uinfo;
     background-color: var(--colour-dark);
-    width: 100%;
+    width: 80%;
     height: auto;
 
 }
 .homebox .search{
     grid-area: search;
+    width: 80%;
+    height: auto;
 
 }
 .homebox .recommend{
     grid-area: recommend;
     background-color: var(--colour-dark);
+    width: 80%;
+    height: auto;
 
 }
 .homebox .favourites{
     grid-area: favourites;
+    width: 80%;
+    height: auto;
 
 }
 
