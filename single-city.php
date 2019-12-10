@@ -110,7 +110,7 @@ mysqli_close($conn);
         </div>
 
         <div class='details-container'>
-            <h1><?php echo $cityRow['AsciiName']; ?></h1>
+            <h1>Current City: <span id="main-area-name"><?php echo $cityRow['AsciiName']; ?></span></h1>
             <div id='city-details'>
                 <!-- All of the data for the selected country -->
                 <?php
@@ -129,7 +129,7 @@ mysqli_close($conn);
                 echo "<span id='country-dom'>" . $countryRow['TopLevelDomain'] . "</span>";
                 echo "<label>Languages:</label>";
                 echo "<span id='country-lang'>" . $countryRow['Languages'] . "</span>";
-                echo "<label>Neighbours:</label?";
+                echo "<label>Neighbours:</label>";
                 echo "<span id='country-neig'>" . $countryRow['Neighbours'] . "</span>";
                 echo "<label>Description:</label>";
                 echo "<span id='country-desc'>" . $countryRow['CountryDescription'] . "</span>";
@@ -141,9 +141,13 @@ mysqli_close($conn);
                 <h1>City Map</h1>
                 <div id='city-map'>
                     <!-- Map of the selected city -->
+                    <?php
+
+                    echo "<img width='100%' src='https://maps.googleapis.com/maps/api/staticmap?center=" . $cityRow['Latitude'] . "+" . $cityRow['Longitude'] . "&zoom=10&scale=1&size=600x300&maptype=roadmap&key=AIzaSyAKn1BfAJIrxQjmPh6tILvS68lozh5eHLs&format=png&visual_refresh=true'></img>";
+
+                    ?>
                 </div>
             </div>
-
         </div>
 
         <div class='country-photo-container'>
