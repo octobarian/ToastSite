@@ -2,97 +2,15 @@
 require 'includes/dbh.inc.php';
 require 'header.php';
 
-if ($conn->connect_error) {
-    exit("Error connecting to the database");
-}
-
-//----- City Details Fetch -----------------------------------------------------------------------------
-if (isset($_GET['AsciiName'])) {
-    $selectedCity = $_GET['AsciiName'];
-
-    $sql = "SELECT * FROM cities WHERE AsciiName=?";
-    $stmt = mysqli_stmt_init($conn);
-
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../index.php?error=Ascii-Name-Error");
-        exit();
-    } else {
-        if ($selectedCity != null) {
-            mysqli_stmt_prepare($stmt, $sql);
-            mysqli_stmt_bind_param($stmt, "s", $selectedCity);
-        } else {
-            header("Location: //index.php?error=passed-city-error");
-        }
-
-        mysqli_stmt_execute($stmt);
-        $city = mysqli_stmt_get_result($stmt);
-        $cityRow = mysqli_fetch_assoc($city);
-    }
-}
-mysqli_stmt_close($stmt);
-
-//----- Country Details Fetch --------------------------------------------------------------------------
-if (isset($_GET['ISO'])) {
-    $selectedCountry = $_GET['ISO'];
-
-    $sql = "SELECT * FROM countries WHERE ISO=?";
-    $stmt = mysqli_stmt_init($conn);
-
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../index.php?error=countryISOerror");
-        exit();
-    } else {
-        if ($selectedCountry != null) {
-            mysqli_stmt_prepare($stmt, $sql);
-            mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
-        } else {
-            header("Location: //index.php?error=selectedCountryError");
-        }
-
-        mysqli_stmt_execute($stmt);
-        $country = mysqli_stmt_get_result($stmt);
-        $countryRow = mysqli_fetch_assoc($country);
-    }
-}
-mysqli_stmt_close($stmt);
-
-//----- City Photos Fetch ------------------------------------------------------------------------------
-$photoList = "SELECT * FROM imagedetails WHERE CityCode=?";
-$stmt = mysqli_stmt_init($conn);
-
-if (!mysqli_stmt_prepare($stmt, $photoList)) {
-    header("Location: ../index.php?error=sqlCityPhotoError");
-    exit();
-} else {
-    if ($selectedCity != null) {
-        mysqli_stmt_prepare($stmt, $photoList);
-        mysqli_stmt_bind_param($stmt, "i", $cityRow['CityCode']);
-    } else {
-        header("Location: //index.php?error=city-error-B");
-    }
-
-    mysqli_stmt_execute($stmt);
-    $photo = mysqli_stmt_get_result($stmt);
-    $photoRow = mysqli_fetch_assoc($photo);
-}
-
-//Close the connection
-mysqli_close($conn);
-
+require 'includes/single-country.inc.php';
+require 'includes/single-city.inc.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+    <!--<meta charset="UTF-8">
+    <title>Document</title>-->
     <link rel="stylesheet" href="css/filter-list.css">
 </head>
-
-<!-- <header>
-    <h1>COMP 3512 Assignment 2 - City Page</h1>
-</header> -->
 
 <body>
     <div class='main-container'>
@@ -119,8 +37,14 @@ mysqli_close($conn);
                 echo "<span id='country-dom'>" . $countryRow['TopLevelDomain'] . "</span>";
                 echo "<label>Languages:</label>";
                 echo "<span id='country-lang'>" . $countryRow['Languages'] . "</span>";
+
                 echo "<label>Neighbours:</label>";
-                echo "<span id='country-neig'>" . $countryRow['Neighbours'] . "</span>";
+                echo "<span id='country-neig'>";
+                foreach ($currentCountryNeigh as $value) {
+                    echo $value . " ";
+                }
+                echo "</span>";
+
                 echo "<label>Description:</label>";
                 echo "<span id='country-desc'>" . $countryRow['CountryDescription'] . "</span>";
                 echo "</section>";
