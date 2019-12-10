@@ -1,9 +1,10 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!doctype html>
 
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="description" content="This is a description">
@@ -25,27 +26,25 @@
                 <li><a href="single-country.php">Countries</a></li>
                 <li><a href="cities.php">Cities</a></li>
                 <li><a href="#">Profile</a></li>
-                <li><a href="#">Favourites</a></li>
+                <li><a href="favorites.php">Favourites</a></li>
             </ul>
             <div class="header-login">
-            <?php
-                if(isset($_SESSION['userId'])){
+                <?php
+                if (isset($_SESSION['userId'])) {
                     //Whatever we want to happen when users are logged in
-                    echo'<form action="includes/logout.inc.php" method="post">
+                    echo '<form action="includes/logout.inc.php" method="post">
                         <button type="submit" name="logout-submit">Logout</button>
                         </form>';
-                }
-                else{
+                } else {
                     //Whatever we want to happen when users are logged out
-                    echo'<form action="includes/login.inc.php" method="post">
+                    echo '<form action="includes/login.inc.php" method="post">
                     <input type="text" name="mailuid" placeholder="E-mail...">
                     <input type="password" name="pwd" placeholder="Password">
                     <button type="submit" name="login-submit">Login</button>
                     </form>
                     <a class="btn" href="signup.php">Signup</a>';
-                    
                 }
-            ?>
+                ?>
             </div>
         </nav>
     </header>

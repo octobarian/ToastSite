@@ -113,6 +113,8 @@ require "header.php";
 ?>
 
 <link rel="stylesheet" href="css/singlephoto.css">
+<script src="js/single-photo.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBx5bCyeIQLxZ6gD7WNySf9t9AEQV9SOr8"></script>
 
 <main>
     <div id='container'>
@@ -154,10 +156,14 @@ require "header.php";
                         <?= $imageRow['Description'] ?>
                     </div>
                     <div id="details">
-                        <?= $imageRow['Exif'] ?> <?= $imageRow['ActualCreator'] ?> <?= $imageRow['CreatorURL'] ?> <?= $imageRow['Colors'] ?>
+                        <script>
+                            displayDetails(<?= json_encode($imageRow) ?>)
+                        </script>
                     </div>
                     <div id="Map">
-
+                        <script>
+                            createMap(<?= $cityRow['Latitude'] ?>, <?= $cityRow['Longitude'] ?>);
+                        </script>
                     </div>
                 </div>
             </div>
