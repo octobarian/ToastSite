@@ -19,10 +19,13 @@
                 <img src="img/toast.svg" alt="logo" height="70px" />
             </a>
             <ul>
-                <li><a href="index.php">home</a></li>
-                <li><a href="about.php">about</a></li>
-                <li><a href="single-photo.php">Single Photo</a></li>
-                <li><a href="single-country.php">Single Country</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="#">Browse/Search</a></li>
+                <li><a href="single-country.php">Countries</a></li>
+                <li><a href="cities.php">Cities</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Favourites</a></li>
             </ul>
             <div class="header-login">
             <?php
