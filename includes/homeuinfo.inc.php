@@ -1,8 +1,8 @@
 <div>
-<p>User Info</p>
-<div><p>First Name:<?php writeFirstName(); ?></p></div>
-<div><p>Last Name:<?php writeLastName(); ?></p></div>
-<div><p>Country:<?php writeCountry(); ?></p></div>
+<h2>User Info</h2>
+<div><p>First Name: <?php writeFirstName(); ?></p></div>
+<div><p>Last Name: <?php writeLastName(); ?></p></div>
+<div><p>Country: <?php writeCountry(); ?></p></div>
 </div>
 
 <?php

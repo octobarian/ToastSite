@@ -15,10 +15,16 @@
     padding: 1%;
 }
 
-img {
+#photo img {
     max-height: 100%;
     max-width: 100%;
+    width: 70em;
+    height: 50em;
     display: block;
+}
+
+main {
+    padding-bottom: 15%;
 }
 
 #infoContainer {
