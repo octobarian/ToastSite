@@ -38,13 +38,13 @@ function populateCountryDetails($c)
     echo "</section>";
 }
 
-echo "<h1> Languages </h1><br>";
-$languages = explode(",", $countryRow['Languages']);
-foreach ($languages as $value) {
-    echo "<li>" . $value . "<li>";
+echo "<h1> Languages </h1>";
+$lang = explode(",", $countryRow['Languages']);
+foreach ($lang as $value) {
+    echo "<li>" . $value . "</li>";
 }
 
-echo "<h1> Neighbours </h1><br>";
+echo "<br><h1> Neighbours </h1>";
 
 $neighbours = explode(",", $countryRow['Neighbours']);
 foreach ($neighbours as $value) {
