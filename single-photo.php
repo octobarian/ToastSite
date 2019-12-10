@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require 'includes/dbh.inc.php';
 //--------IMAGE FETCH-----------------------------------------------------------
@@ -112,7 +112,7 @@ mysqli_close($conn);
 require "header.php";
 ?>
 
-<!-- <link rel="stylesheet" href="css/singlephoto.css"> -->
+<link rel="stylesheet" href="css/singlephoto.css">
 
 <main>
     <div id='container'>
@@ -136,17 +136,17 @@ require "header.php";
             <div id="favorites">
                 <!-- https://stackoverflow.com/questions/20738329/how-to-call-a-php-function-on-the-click-of-a-button -->
                 <form action="" method="post">
-                    <input type="submit" name="fav" value="Add to Favorites">
+                    <input type="submit" id="button" name="fav" value="Add to Favorites">
                 </form>
-
+            </div>
             <div id="bottomInfo">
-                <div class=tripleButton id="buttDesc">
+                <div class="tripleButton" id="buttDesc">
                     <p>Description</p>
                 </div>
-                <div class=tripleButton id="buttDet">
+                <div class="tripleButton" id="buttDet">
                     <p>Details</p>
                 </div>
-                <div class=tripleButton id="buttMap">
+                <div class="tripleButton" id="buttMap">
                     <p>Map</p>
                 </div>
                 <div class="tripleOption">
@@ -154,7 +154,7 @@ require "header.php";
                         <?= $imageRow['Description'] ?>
                     </div>
                     <div id="details">
-                        <?=$imageRow['Exif']?> <?=$imageRow['ActualCreator']?> <?=$imageRow['CreatorURL']?> <?=$imageRow['Colors']?>
+                        <?= $imageRow['Exif'] ?> <?= $imageRow['ActualCreator'] ?> <?= $imageRow['CreatorURL'] ?> <?= $imageRow['Colors'] ?>
                     </div>
                     <div id="Map">
 
