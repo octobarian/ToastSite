@@ -1,56 +1,53 @@
-:root{
-    --colour-dark:#d9d9d9;
-    --colour-plain:white;
-    --colour-light:ghostwhite;
-    --colour-special:#ebd088;
-    --colour-special2:#ffbf66;
+#container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
 }
 
-#container{
-    display:grid;
-    grid-template-columns: 100%;
-    grid-template-rows: repeat(2, 50%);
-    grid-gap: 20px;
-}
-
-#photo{
+#photo {
     padding-top: 3%;
-    padding-left: 3%;
-    padding-right: 3%;
-    grid-column: 1/2;
+    padding-left: 1%;
+    padding-right: 1%;
+    grid-column: 1;
 }
-img{
+
+#photoInfo {
+    padding: 1%;
+}
+
+img {
     max-height: 100%;
     max-width: 100%;
-    display: block; 
+    display: block;
 }
-#infoContainer{
-    padding: 3%;
-    grid-column: 1/2;
-    grid-row: 2/3;
+
+#infoContainer {
+    padding: 1%;
+    padding-right: 5%;
+    grid-column: 2;
+    grid-row: 1;
     display: grid;
     grid-template-columns: repeat(2, 50%);
     grid-template-rows: 30% 70%;
 }
 
-#bottomInfo{
+#bottomInfo {
     grid-column: 1/3;
-    grid-row: 2/3;
+    grid-row: 2;
     display: grid;
-    grid-template-columns: repeat(3, 33%);
-    grid-template-rows: 20% 80%;
     align-content: center;
 }
 
-#favorites{
-    grid-column: 2/3;
-    grid-row: 1/2;
-   padding: 3%;
-   padding-top: 20%;
-  
+#favorites {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 3;
+    padding-top: 35%;
+    padding-left: 20%;
+
 }
 
-#favorites p{
+#favorites p {
     text-align: center;
     align-content: center;
     padding-top: 15px;
@@ -59,10 +56,11 @@ img{
     border-radius: 4px;
     margin: 10px;
     color: var(--colour-plain);
-    background-color:  var(--colour-special);
+    background-color: var(--colour-special);
 }
 
-.tripleButton{
+.tripleButton,
+#button {
     text-align: center;
     align-content: center;
     padding-top: 1px;
@@ -71,52 +69,59 @@ img{
     margin: 10px;
     margin-right: 15px;
     color: var(--colour-plain);
-    background-color:  var(--colour-special);
-    
+    background-color: var(--colour-special);
+
 }
 
-.tripleButton:hover, #favorites p:hover{
+#button {
+    padding: 10%;
+}
+
+.tripleButton:hover,
+#favorites p:hover {
     background-color: var(--colour-special2);
 }
 
-#photoInfo{
-    grid-column: 1/2;
-    grid-row: 1/2;
+#photoInfo {
+    grid-column: 1;
+    grid-row: 1;
 }
 
-.tripleOption{
+.tripleOption {
     grid-column: 1/4;
     border: 2px solid black;
-    overflow: auto;
+    overflow-y: auto;
     border-radius: 10px;
     margin: 10px;
     padding: 3%;
     background-color: var(--colour-light);
+
 }
 
-@media screen and (min-width: 736px){
-    
-    #container{
-    display:grid;
-    grid-template-columns: 65% 35%;
-    grid-gap: 20px;
+@media screen and (min-width: 736px) {
+
+    #container {
+        display: grid;
+        grid-template-columns: 65% 35%;
+        grid-gap: 1%;
     }
 
-    #photos{
+    #photos {
         padding-right: 0%;
-        grid-column:1/2;
+        grid-column: 1;
     }
 
-    #infoContainer{
-        grid-row: 1/2;
-        grid-column: 2/3;
+    #infoContainer {
+        grid-row: 1;
+        grid-column: 2;
     }
 
-    .tripleButton{
+    .tripleButton {
         padding-top: 3%;
-       
-    } 
-    #favorites p{
-        padding-top: 30px;
+
+    }
+
+    #favorites p {
+        padding-top: 20px;
     }
 }
