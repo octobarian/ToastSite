@@ -4,27 +4,53 @@ require 'includes/single-country.inc.php';
 
 function populateCountryDetails($c)
 {
+
+    //HARDCODED STYLES FOR NOW SINCE CSS DOES NOT WORK
     echo "<section class='details-list-section'>";
+
     echo "<label>Area:</label>";
     echo "<span id='country-area'>" . $c['Area'] . "</span>";
+
     echo "<label>Population:</label>";
     echo "<span id='country-pop'>" . $c['Population'] . "</span>";
+
     echo "<label>Capital City:</label>";
     echo "<span id='country-cap'>" . $c['Capital'] . "</span>";
+
     echo "<label>Currency Name:</label>";
     echo "<span id='country-curr-name'>" . $c['CurrencyName'] . "</span>";
+
     echo "<label>Currency Code:</label>";
     echo "<span id='country-curr-code'>" . $c['CurrencyCode'] . "</span>";
+
     echo "<label>Domain:</label>";
     echo "<span id='country-dom'>" . $c['TopLevelDomain'] . "</span>";
+
     echo "<label>Languages:</label>";
     echo "<span id='country-lang'>" . $c['Languages'] . "</span>";
-    echo "<label>Neighbours:</label?";
+
+    echo "<label>Neighbours:</label>";
     echo "<span id='country-neig'>" . $c['Neighbours'] . "</span>";
+
     echo "<label>Description:</label>";
     echo "<span id='country-desc'>" . $c['CountryDescription'] . "</span>";
+
     echo "</section>";
 }
+
+echo "<h1> Languages </h1><br>";
+$languages = explode(",", $countryRow['Languages']);
+foreach ($languages as $value) {
+    echo "<li>" . $value . "<li>";
+}
+
+echo "<h1> Neighbours </h1><br>";
+
+$neighbours = explode(",", $countryRow['Neighbours']);
+foreach ($neighbours as $value) {
+    echo "<li>" . $value . "</li>";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -57,13 +83,14 @@ function populateCountryDetails($c)
         </div>
 
         <div class='details-container'>
-            <h1><?php echo $countryRow['CountryName']; ?></h1>
+            <h1>Current Country: <span id="main-area-name"><?php echo $countryRow['CountryName']; ?></span></h1>
             <div id='country-details'>
                 <!-- All of the data for the selected country -->
                 <?php populateCountryDetails($countryRow); ?>
-            </div>
+            </div><br>
             <div id='country-city-list'>
                 <!-- List of cities within the selected country-->
+                <h1>List Of Cities Located In: <?php echo $countryRow['CountryName']; ?></h1>
                 <ul id='cities-list'>
                     <?php
                     if ($cityRow != null) {
