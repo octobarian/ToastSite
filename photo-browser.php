@@ -13,7 +13,7 @@ $sql ="SELECT * FROM imagedetails";
 $stmt = mysqli_stmt_init($conn);
 
 if(!mysqli_stmt_prepare($stmt, $sql)){
-    header("Location: ../index.php?error=sqlerror");
+    header("Location: index.php?error=sqlerror");
     exit();
 }
 else{
@@ -36,7 +36,7 @@ $countrySQL = "SELECT * FROM countries WHERE ISO IN (SELECT CountryCodeISO FROM 
 $stmt = mysqli_stmt_init($conn);
 
 if(!mysqli_stmt_prepare($stmt, $countrySQL)){
-    header("Location: ../index.php?error=sqlerror");
+    header("Location: index.php?error=sqlerror");
     exit();
 }
 else{
@@ -58,7 +58,7 @@ $citySQL = "SELECT * FROM cities WHERE CityCode IN (SELECT CityCode FROM imagede
 $stmt = mysqli_stmt_init($conn);
 
 if(!mysqli_stmt_prepare($stmt, $citySQL)){
-    header("Location: ../index.php?error=sqlerror");
+    header("Location: index.php?error=sqlerror");
     exit();
 }
 else{
@@ -79,7 +79,7 @@ require "header.php";
         <!--Search photos by title-->
         <?php include 'includes/photo-search.inc.php'?>
         <!--Search photos by country-->
-        <form action="/COMP-3512-A2/photo-browser.php" method="post">
+        <form action="photo-browser.php" method="post">
             <select name="countrySearch" id="photoCountrySelect">
                 <?php
            //https://riptutorial.com/php/example/9382/loop-through-mysqli-results
@@ -96,7 +96,7 @@ require "header.php";
             <input type="submit" value="Search Country">
         </form>
         <!--Search photos by city-->
-        <form action="/COMP-3512-A2/photo-browser.php" method="post">
+        <form action="photo-browser.php" method="post">
             <select name="citySearch" id="photoCitySelect">
                 <?php
         
@@ -125,7 +125,7 @@ require "header.php";
         $stmt = mysqli_stmt_init($conn);                    
         
     if(!mysqli_stmt_prepare($stmt, $findPhotoSQL)){
-        header("Location: ../index.php?error=sqlerror");
+        header("Location: index.php?error=sqlerror");
         exit();
     }else{
 
@@ -150,7 +150,7 @@ require "header.php";
     $stmt = mysqli_stmt_init($conn);                    
     
     if(!mysqli_stmt_prepare($stmt, $findPhotoSQL)){
-        header("Location: ../index.php?error=sqlerror");
+        header("Location: index.php?error=sqlerror");
     exit();
     }else{
 
@@ -178,7 +178,7 @@ require "header.php";
     $stmt = mysqli_stmt_init($conn);                    
     
     if(!mysqli_stmt_prepare($stmt, $findPhotoSQL)){
-        header("Location: ../index.php?error=sqlerror");
+        header("Location: index.php?error=sqlerror");
     exit();
     }else{
 
@@ -204,12 +204,12 @@ require "header.php";
             echo '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/' . $row['Path'] . '" />';
             echo $row['Title'];
             
-            echo '<form action="/COMP-3512-A2/single-photo.php" method="get">';
+            echo '<form action="single-photo.php" method="get">';
             echo '<input type="hidden" name="ImageID" value="' . $row['ImageID'] . '">';
             echo '<input type="submit" name="viewImg" value="View">';
             echo '</form>';
 
-            echo '<form action="/COMP-3512-A2/photo-browser.php" method="post">';
+            echo '<form action="photo-browser.php" method="post">';
             echo '<input type="hidden" name="path" value="' . $row['Path']. '">';
             if ($isCountry == 1){
                 echo '<input type="hidden" name="countrySearch" value="' . $searchValue . '">';
