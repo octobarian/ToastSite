@@ -7,7 +7,6 @@ function populateCountryDetails($c)
 
     //HARDCODED STYLES FOR NOW SINCE CSS DOES NOT WORK
     echo "<section class='details-list-section'>";
-
     echo "<label>Area:</label>";
     echo "<span id='country-area'>" . $c['Area'] . "</span>";
     echo "<label>Population:</label>";
@@ -40,27 +39,8 @@ function populateCountryDetails($c)
 
 // //Only goes through if neighbours exist
 // if ($neighbours != null) {
-
-//     $countries = "SELECT CountryName FROM countries WHERE ISO=?";
-//     $stmt = mysqli_stmt_init($conn);
-
-//     foreach ($neighbours as $val) {
-
-//         if (!mysqli_stmt_prepare($stmt, $countries)) {
-//             header("Location: ../index.php?error=neighbour-sql-error-1");
-//             exit();
-//         } else {
-//             if ($selectedCountry != null) {
-//                 mysqli_stmt_prepare($stmt, $countries);
-//                 mysqli_stmt_bind_param($stmt, "s", $val);
-//             } else {
-//                 header("Location: //index.php?error=selectedCountryError");
-//             }
-
-//             mysqli_stmt_execute($stmt);
-//             $count = mysqli_stmt_get_result($stmt);
-//         }
-//         echo "<li>" . $count . "</li>";
+//     foreach ($neighbours as $currentNeigh) {
+//         //echo "<li>" . $value . "</li>";
 //     }
 // } else {
 //     echo "<li>THERE ARE NO NEIGHBOURS</li>";
@@ -84,18 +64,7 @@ function populateCountryDetails($c)
 <body>
     <div class='main-container'>
 
-        <div class='country-container'>
-            <ul id='country-filter'>
-                <h1>PLACEHOLDER FOR FILTERS</h1>
-                <!-- Add the filter options for countries here -->
-            </ul>
-            <ul id='country-list'>
-                <!-- All of the countries will be populated here as list items -->
-
-                <!-- Get's the list of cities -->
-                <form method="GET" action="http://localhost/Github/COMP-3512-A2/single-country.php?"></form>
-            </ul>
-        </div>
+        <?php require 'includes/country-filter-list.php'; ?>
 
         <div class='details-container'>
             <h1>Current Country: <span id="main-area-name"><?php echo $countryRow['CountryName']; ?></span></h1>
@@ -128,7 +97,7 @@ function populateCountryDetails($c)
                 if ($photoRow != null) {
                     while ($photoRow = mysqli_fetch_assoc($photo)) {
                         //echo "<li>" . $photoRow['ImageID'] . ", " . $photoRow['Title'] . "</li>";
-                        echo "<a href='single-photo.php?ImageID=" . $photoRow['ImageID'] . "'>" . "<img src=https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/" . $photoRow['Path'] . "></img></a>";
+                        echo "<a href='single-photo.php?ImageID=" . $photoRow['ImageID'] . "'>" . "<img src=https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/" . $photoRow['Path'] . "></a>";
                     }
                 } else {
                     echo $countryRow['CountryName'] . " Has No Photos To Display";

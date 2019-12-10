@@ -96,18 +96,7 @@ mysqli_close($conn);
 <body>
     <div class='main-container'>
 
-        <div class='country-container'>
-            <ul id='country-filter'>
-                <h1>PLACEHOLDER FOR FILTERS</h1>
-                <!-- Add the filter options for countries here -->
-            </ul>
-            <ul id='country-list'>
-                <!-- All of the countries will be populated here as list items -->
-
-                <!-- Get's the list of cities -->
-                <form method="GET" action="http://localhost/Github/COMP-3512-A2/single-city.php?"></form>
-            </ul>
-        </div>
+        <?php require 'includes/country-filter-list.php'; ?>
 
         <div class='details-container'>
             <h1>Current City: <span id="main-area-name"><?php echo $cityRow['AsciiName']; ?></span></h1>
@@ -143,7 +132,7 @@ mysqli_close($conn);
                     <!-- Map of the selected city -->
                     <?php
 
-                    echo "<img width='100%' src='https://maps.googleapis.com/maps/api/staticmap?center=" . $cityRow['Latitude'] . "+" . $cityRow['Longitude'] . "&zoom=10&scale=1&size=600x300&maptype=roadmap&key=AIzaSyAKn1BfAJIrxQjmPh6tILvS68lozh5eHLs&format=png&visual_refresh=true'></img>";
+                    echo "<img width='100%' src='https://maps.googleapis.com/maps/api/staticmap?center=" . $countryRow['CountryName'] . "&zoom=4&scale=1&size=600x300&maptype=roadmap&key=AIzaSyAKn1BfAJIrxQjmPh6tILvS68lozh5eHLs&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C" . $cityRow['Latitude'] . ",+" . $cityRow['Longitude'] . "'></img>";
 
                     ?>
                 </div>

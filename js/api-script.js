@@ -101,3 +101,6 @@ function loadCountries(countries) {
         //newLink.setAttribute("id", c.ISO);
     };
 }
+
+//-----COUNTRY FILTERS---------------------------------------------------------------------------------------------
+
