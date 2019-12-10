@@ -6,28 +6,26 @@ if ($conn->connect_error) {
 //-----COUNTRY ISO FETCH--------------------------------------------------------------------------------
 
 //Checks to see if the user has clicked a link
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if (isset($_GET['ISO'])) {
-        $selectedCountry = $_GET['ISO'];
+if (isset($_GET['ISO'])) {
+    $selectedCountry = $_GET['ISO'];
 
-        $sql = "SELECT * FROM countries WHERE ISO=?";
-        $stmt = mysqli_stmt_init($conn);
+    $sql = "SELECT * FROM countries WHERE ISO=?";
+    $stmt = mysqli_stmt_init($conn);
 
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../index.php?error=countryISOerror");
-            exit();
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("Location: ../index.php?error=countryISOerror");
+        exit();
+    } else {
+        if ($selectedCountry != null) {
+            mysqli_stmt_prepare($stmt, $sql);
+            mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
         } else {
-            if ($selectedCountry != null) {
-                mysqli_stmt_prepare($stmt, $sql);
-                mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
-            } else {
-                header("Location: //index.php?error=selectedCountryError");
-            }
-
-            mysqli_stmt_execute($stmt);
-            $country = mysqli_stmt_get_result($stmt);
-            $countryRow = mysqli_fetch_assoc($country);
+            header("Location: /index.php?error=selectedCountryError");
         }
+
+        mysqli_stmt_execute($stmt);
+        $country = mysqli_stmt_get_result($stmt);
+        $countryRow = mysqli_fetch_assoc($country);
     }
 }
 mysqli_stmt_close($stmt);
@@ -66,7 +64,7 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
         mysqli_stmt_prepare($stmt, $photoList);
         mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
     } else {
-        header("Location: //index.php?error=countryError-B");
+        header("Location: /GitHub/COMP-3512-A2/single-country.php?ISO=CA");
     }
 
     mysqli_stmt_execute($stmt);
@@ -74,7 +72,56 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
     $photoRow = mysqli_fetch_assoc($photo);
 }
 
-mysqli_stmt_close($stmt);
+//-----NEIGHBOURS MATCHING------------------------------------------------------------------------------
 
-//Close the connection
-mysqli_close($conn);
+$neighbours = explode(",", $countryRow['Neighbours']);
+$currentCountryNeigh[] = "";
+
+//Only goes through if neighbours exist
+if ($neighbours != null) {
+    foreach ($neighbours as $currentNeigh) {
+        $neighsql = "SELECT * FROM countries WHERE ISO=?";
+        $stmt = mysqli_stmt_init($conn);
+
+        if (!mysqli_stmt_prepare($stmt, $neighsql)) {
+            header("Location: ../index.php?error=neighbour-sql-error");
+            exit();
+        } else {
+            mysqli_stmt_prepare($stmt, $neighsql);
+            mysqli_stmt_bind_param($stmt, "s", $currentNeigh);
+        }
+
+        mysqli_stmt_execute($stmt);
+
+        $neighbourRow = mysqli_stmt_get_result($stmt);
+        if ($row = mysqli_fetch_assoc($neighbourRow)) {
+
+            array_push($currentCountryNeigh, $row['CountryName']);
+        }
+    }
+
+    mysqli_stmt_close($stmt);
+} else {
+    echo "<li>No Neighbours To Display</li>";
+}
+
+// if (isset($_GET['submitContinent'])) {
+//     $selectedContinent = $_GET['contTest'];
+
+//     $continentFilter = "SELECT * FROM countries WHERE Continent=?";
+//     $stmt = mysqli_stmt_init($conn);
+//     if (!mysqli_stmt_prepare($stmt, $continentFilter)) {
+//         header("Location: ../index.php?error=continents-search-sql-error");
+//         exit();
+//     } else {
+//         if ($selectedContinent != null) {
+//             mysqli_stmt_prepare($stmt, $continentFilter);
+//             mysqli_stmt_bind_param($stmt, "s", $selectedContinent);
+//             mysqli_stmt_execute($stmt);
+//             $contiFilter = mysqli_stmt_get_result($stmt);
+//         } else {
+//             header("Location: //index.php?error=no-continent-passed");
+//         }
+//     }
+// }
+// mysqli_stmt_close($stmt);

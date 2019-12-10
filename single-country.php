@@ -1,66 +1,13 @@
 <?php
 require 'includes/dbh.inc.php';
-require 'includes/single-country.inc.php';
 require 'header.php';
 
-function populateCountryDetails($c)
-{
-
-    //HARDCODED STYLES FOR NOW SINCE CSS DOES NOT WORK
-    echo "<section class='details-list-section'>";
-    echo "<label>Area:</label>";
-    echo "<span id='country-area'>" . $c['Area'] . "</span>";
-    echo "<label>Population:</label>";
-    echo "<span id='country-pop'>" . $c['Population'] . "</span>";
-    echo "<label>Capital City:</label>";
-    echo "<span id='country-cap'>" . $c['Capital'] . "</span>";
-    echo "<label>Currency Name:</label>";
-    echo "<span id='country-curr-name'>" . $c['CurrencyName'] . "</span>";
-    echo "<label>Currency Code:</label>";
-    echo "<span id='country-curr-code'>" . $c['CurrencyCode'] . "</span>";
-    echo "<label>Domain:</label>";
-    echo "<span id='country-dom'>" . $c['TopLevelDomain'] . "</span>";
-    echo "<label>Languages:</label>";
-    echo "<span id='country-lang'>" . $c['Languages'] . "</span>";
-    echo "<label>Neighbours:</label>";
-    echo "<span id='country-neig'>" . $c['Neighbours'] . "</span>";
-    echo "<label>Description:</label>";
-    echo "<span id='country-desc'>" . $c['CountryDescription'] . "</span>";
-    echo "</section>";
-}
-
-// echo "<h1> Languages </h1>";
-// $lang = explode(",", $countryRow['Languages']);
-// foreach ($lang as $value) {
-//     echo "<li>" . $value . "</li>";
-// }
-
-// echo "<h1> Neighbours </h1>";
-// $neighbours = explode(",", $countryRow['Neighbours']);
-
-// //Only goes through if neighbours exist
-// if ($neighbours != null) {
-//     foreach ($neighbours as $currentNeigh) {
-//         //echo "<li>" . $value . "</li>";
-//     }
-// } else {
-//     echo "<li>THERE ARE NO NEIGHBOURS</li>";
-// }
-
+require 'includes/single-country.inc.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
     <link rel="stylesheet" href="css/filter-list.css">
 </head>
-
-<!-- <header>
-    <h1>COMP 3512 Assignment 2 - Country Page</h1>
-</header> -->
 
 <body>
     <div class='main-container'>
@@ -69,9 +16,48 @@ function populateCountryDetails($c)
 
         <div class='details-container'>
             <h1>Current Country: <span id="main-area-name"><?php echo $countryRow['CountryName']; ?></span></h1>
+            <h1>
+                <?php
+                if (isset($contiFilter)) {
+                    while ($contiRow = mysqli_fetch_assoc($contiFilter)) {
+                        echo "<li>" . $contiRow['CountryName'] . "</li>";
+                    }
+                }
+                ?>
+            </h1>
             <div id='country-details'>
                 <!-- All of the data for the selected country -->
-                <?php populateCountryDetails($countryRow); ?>
+                <?php
+
+                //populateCountryDetails($countryRow);
+
+                echo "<section class='details-list-section'>";
+                echo "<label>Area:</label>";
+                echo "<span id='country-area'>" . $countryRow['Area'] . "</span>";
+                echo "<label>Population:</label>";
+                echo "<span id='country-pop'>" . $countryRow['Population'] . "</span>";
+                echo "<label>Capital City:</label>";
+                echo "<span id='country-cap'>" . $countryRow['Capital'] . "</span>";
+                echo "<label>Currency Name:</label>";
+                echo "<span id='country-curr-name'>" . $countryRow['CurrencyName'] . "</span>";
+                echo "<label>Currency Code:</label>";
+                echo "<span id='country-curr-code'>" . $countryRow['CurrencyCode'] . "</span>";
+                echo "<label>Domain:</label>";
+                echo "<span id='country-dom'>" . $countryRow['TopLevelDomain'] . "</span>";
+                echo "<label>Languages:</label>";
+                echo "<span id='country-lang'>" . $countryRow['Languages'] . "</span>";
+
+                echo "<label>Neighbours:</label>";
+                echo "<span id='country-neig'>";
+                foreach ($currentCountryNeigh as $value) {
+                    echo $value . " ";
+                }
+                echo "</span>";
+
+                echo "<label>Description:</label>";
+                echo "<span id='country-desc'>" . $countryRow['CountryDescription'] . "</span>";
+                echo "</section>";
+                ?>
             </div><br>
             <div id='country-city-list'>
                 <!-- List of cities within the selected country-->
