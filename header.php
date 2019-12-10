@@ -22,10 +22,9 @@ session_start();
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
-                <li><a href="#">Browse/Search</a></li>
+                <li><a href="photo-browser.php">Browse/Search</a></li>
                 <li><a href="single-country.php">Countries</a></li>
                 <li><a href="cities.php">Cities</a></li>
-                <li><a href="#">Profile</a></li>
                 <li><a href="favorites.php">Favourites</a></li>
             </ul>
             <div class="header-login">
