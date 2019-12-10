@@ -143,7 +143,7 @@ mysqli_close($conn);
                     <!-- Map of the selected city -->
                     <?php
 
-                    echo "<img width='100%' src='https://maps.googleapis.com/maps/api/staticmap?center=" . $cityRow['Latitude'] . "+" . $cityRow['Longitude'] . "&zoom=10&scale=1&size=600x300&maptype=roadmap&key=AIzaSyAKn1BfAJIrxQjmPh6tILvS68lozh5eHLs&format=png&visual_refresh=true'></img>";
+                    echo "<img width='100%' src='https://maps.googleapis.com/maps/api/staticmap?center=" . $countryRow['CountryName'] . "&zoom=4&scale=1&size=600x300&maptype=roadmap&key=AIzaSyAKn1BfAJIrxQjmPh6tILvS68lozh5eHLs&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C" . $cityRow['Latitude'] . ",+" . $cityRow['Longitude'] . "'></img>";
 
                     ?>
                 </div>
