@@ -110,6 +110,7 @@ header {
     DETAILS-CONTAINER (CENTER COLUMN) LAYOUT --------------------------------------------
 */
 
+/* Styles the details section */
 .details-list-section {
     display: grid;
     grid-gap: 1em;
@@ -119,12 +120,14 @@ header {
     border-radius: 1em;
 }
 
+/* Increase the font size of titles in the details column */
 .details-container>h1,
 #country-city-list>h1,
 .city-map-container>h1 {
     font-size: 140%;
 }
 
+/* Makes the selected country's name bold */
 #main-area-name {
     font-weight: 700;
 }
@@ -132,3 +135,8 @@ header {
 /* 
     COUNTRY-PHOTO-CONTAINER (RIGHT COLUMN) LAYOUT ---------------------------------------
 */
+
+/* Increases font size of country and city photo title */
+.country-photo-container>h1 {
+    font-size: 140%;
+}
