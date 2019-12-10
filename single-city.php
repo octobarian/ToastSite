@@ -96,18 +96,7 @@ mysqli_close($conn);
 <body>
     <div class='main-container'>
 
-        <div class='country-container'>
-            <ul id='country-filter'>
-                <h1>PLACEHOLDER FOR FILTERS</h1>
-                <!-- Add the filter options for countries here -->
-            </ul>
-            <ul id='country-list'>
-                <!-- All of the countries will be populated here as list items -->
-
-                <!-- Get's the list of cities -->
-                <form method="GET" action="http://localhost/Github/COMP-3512-A2/single-city.php?"></form>
-            </ul>
-        </div>
+        <?php require 'includes/country-filter-list.php'; ?>
 
         <div class='details-container'>
             <h1>Current City: <span id="main-area-name"><?php echo $cityRow['AsciiName']; ?></span></h1>
