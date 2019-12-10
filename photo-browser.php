@@ -13,7 +13,7 @@ $sql ="SELECT * FROM imagedetails";
 $stmt = mysqli_stmt_init($conn);
 
 if(!mysqli_stmt_prepare($stmt, $sql)){
-    header("Location: ../index.php?error=sqlerror");
+    header("Location: index.php?error=sqlerror");
     exit();
 }
 else{
@@ -36,7 +36,7 @@ $countrySQL = "SELECT * FROM countries WHERE ISO IN (SELECT CountryCodeISO FROM 
 $stmt = mysqli_stmt_init($conn);
 
 if(!mysqli_stmt_prepare($stmt, $countrySQL)){
-    header("Location: ../index.php?error=sqlerror");
+    header("Location: index.php?error=sqlerror");
     exit();
 }
 else{
@@ -58,7 +58,7 @@ $citySQL = "SELECT * FROM cities WHERE CityCode IN (SELECT CityCode FROM imagede
 $stmt = mysqli_stmt_init($conn);
 
 if(!mysqli_stmt_prepare($stmt, $citySQL)){
-    header("Location: ../index.php?error=sqlerror");
+    header("Location: index.php?error=sqlerror");
     exit();
 }
 else{
@@ -75,13 +75,14 @@ require "header.php";
 ?>
 
 <main>
-    <div id="photoCountryFilter">
-        <!--Search photos by title-->
-        <?php include 'includes/photo-search.inc.php'?>
-        <!--Search photos by country-->
-        <form action="/COMP-3512-A2/photo-browser.php" method="post">
-            <select name="countrySearch" id="photoCountrySelect">
-                <?php
+    <div id="container">
+        <div id="photoCountryFilter">
+            <!--Search photos by title-->
+            <?php include 'includes/homesearch.inc.php'?>
+            <!--Search photos by country-->
+            <form action="photo-browser.php" method="post">
+                <select name="countrySearch" id="photoCountrySelect">
+                    <?php
            //https://riptutorial.com/php/example/9382/loop-through-mysqli-results
          
                 while($row = mysqli_fetch_assoc($country)){
@@ -92,13 +93,13 @@ require "header.php";
                 }
             ?>
 
-            </select>
-            <input type="submit" value="Search Country">
-        </form>
-        <!--Search photos by city-->
-        <form action="/COMP-3512-A2/photo-browser.php" method="post">
-            <select name="citySearch" id="photoCitySelect">
-                <?php
+                </select>
+                <button type="submit" value="Search Country">
+            </form>
+            <!--Search photos by city-->
+            <form action="photo-browser.php" method="post">
+                <select name="citySearch" id="photoCitySelect">
+                    <?php
         
                 while($row = mysqli_fetch_assoc($city)){
                     $value = $row['CityCode' ];
@@ -108,126 +109,93 @@ require "header.php";
                 }
             ?>
 
-            </select>
-            <input type="submit" value="Search City">
-        </form>
-    </div>
+                </select>
+                <button type="submit" value="Search City">
+            </form>
+        </div>
 
-    <div id="browse/searchResult">
-        <?php
-        if(isset($_POST['countrySearch'])){ //If searching by country
-            $countryPostValue = $_POST['countrySearch'];
-            $isCountry = 1;
+        <div id="browse/searchResult">
+            <?php
+                if(isset($_POST['countrySearch'])){ //If searching by country
+                    $countryPostValue = $_POST['countrySearch'];
+                    $isCountry = 1;
 //------FETCH PHOTOS THAT MATCHES CLICKED COUNTRY---------------------------------
-
-        $findPhotoSQL = "SELECT * FROM imagedetails WHERE CountryCodeISO = ? ORDER BY Title";
-
-        $stmt = mysqli_stmt_init($conn);                    
+                    $findPhotoSQL = "SELECT * FROM imagedetails WHERE CountryCodeISO = ? ORDER BY Title";
+                    $searchedImage = photoSQLSearch($findPhotoSQL, $conn, $countryPostValue);
+                    displayPhotos($searchedImage, $isCountry, $countryPostValue);
         
-    if(!mysqli_stmt_prepare($stmt, $findPhotoSQL)){
-        header("Location: ../index.php?error=sqlerror");
-        exit();
-    }else{
-
-        mysqli_stmt_prepare($stmt, $findPhotoSQL);
-        mysqli_stmt_bind_param($stmt, "s", $countryPostValue);
-        mysqli_stmt_execute($stmt);
-        $searchedImage = mysqli_stmt_get_result($stmt);
-        
-    }
-    mysqli_stmt_close($stmt);
-//-----------FETCH END--------------------------------------------------------------
-    
-    displayPhotos($searchedImage, $isCountry, $countryPostValue);
-        
-        }elseif(isset($_POST['citySearch'])){ //If searching by city
-            $cityPostValue = $_POST['citySearch'];
-            $isCountry = 0;
+                }elseif(isset($_POST['citySearch'])){ //If searching by city
+                    $cityPostValue = $_POST['citySearch'];
+                    $isCountry = 0;
 
     //-----FETCH PHOTOS THAT MATCHES CLICKED CITY---------------------------------
-    $findPhotoSQL = "SELECT * FROM imagedetails WHERE CityCode = ? ORDER BY Title";
-
-    $stmt = mysqli_stmt_init($conn);                    
+                    $findPhotoSQL = "SELECT * FROM imagedetails WHERE CityCode = ? ORDER BY Title";
+                    $searchedImage = photoSQLSearch($findPhotoSQL, $conn, $cityPostValue);
+                    displayPhotos($searchedImage, $isCountry, $cityPostValue);
     
-    if(!mysqli_stmt_prepare($stmt, $findPhotoSQL)){
-        header("Location: ../index.php?error=sqlerror");
-    exit();
-    }else{
-
-    mysqli_stmt_prepare($stmt, $findPhotoSQL);
-    mysqli_stmt_bind_param($stmt, "i", $cityPostValue);
-    mysqli_stmt_execute($stmt);
-    $searchedImage = mysqli_stmt_get_result($stmt);
-    
-    }
-        mysqli_stmt_close($stmt);        
-//------FETCH END-------------------------------------------------------
-    
-    displayPhotos($searchedImage, $isCountry, $cityPostValue);
-    
-}elseif (isset($_POST['titleSearch'])){
-      $titleValue = $_POST['titleSearch'];
-        $isCountry = 2;
-     if ($titleValue == ""){
-         echo '<h1>Field is blank. Search for photo</h1>';
-     }else{  
+                }elseif (isset($_POST['titleSearch'])){
+                    $titleValue = $_POST['titleSearch'];
+                    $isCountry = 2;
+                    if ($titleValue == ""){
+                        echo '<h1>Field is blank. Search for photo</h1>';
+                    }else{  
     //---------FETCH PHOTOS THAT MATCHES TITLE--------------------------------
     //https://dba.stackexchange.com/questions/203206/find-if-any-of-the-rows-partially-match-a-string
-    $findPhotoSQL = "SELECT * FROM imagedetails WHERE Title LIKE CONCAT('%', ? , '%') ORDER BY Title";
+                        $findPhotoSQL = "SELECT * FROM imagedetails WHERE Title LIKE CONCAT('%', ? , '%') ORDER BY Title";
+                        $searchedImage = photoSQLSearch($findPhotoSQL, $conn, $titleValue);
+                        displayPhotos($searchedImage, $isCountry, $titleValue);
+                    }
+                }else{
+                    echo  '<h1> Please search for photos by title, country, or city! </h1>';
+                }
+                
 
-    $stmt = mysqli_stmt_init($conn);                    
-    
-    if(!mysqli_stmt_prepare($stmt, $findPhotoSQL)){
-        header("Location: ../index.php?error=sqlerror");
-    exit();
-    }else{
-
-    mysqli_stmt_prepare($stmt, $findPhotoSQL);
-    mysqli_stmt_bind_param($stmt, "s", $titleValue);
-    mysqli_stmt_execute($stmt);
-    $searchedImage = mysqli_stmt_get_result($stmt);
-    
-    }
-        mysqli_stmt_close($stmt);        
-//------FETCH END------------------------------------------------------- 
-      displayPhotos($searchedImage, $isCountry, $titleValue);
-      }
-    }else{
-          echo  '<h1> Please search for photos by title, country, or city! </h1>';
-    }
-
-
-    function displayPhotos($searchedImage, $isCountry, $searchValue){
-        echo '<h1>Search Result</h1>';
-        while ($row = mysqli_fetch_assoc($searchedImage)){
-            echo '<div>';
-            echo '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/' . $row['Path'] . '" />';
-            echo $row['Title'];
+                function displayPhotos($searchedImage, $isCountry, $searchValue){
+                    echo '<h1>Search Result</h1>';
+                    while ($row = mysqli_fetch_assoc($searchedImage)){
+                        echo '<div>';
+                        echo '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/square150/' . $row['Path'] . '" />';
+                        echo $row['Title'];
             
-            echo '<form action="/COMP-3512-A2/single-photo.php" method="get">';
-            echo '<input type="hidden" name="ImageID" value="' . $row['ImageID'] . '">';
-            echo '<input type="submit" name="viewImg" value="View">';
-            echo '</form>';
+                        echo '<form action="single-photo.php" method="get">';
+                        echo '<input type="hidden" name="ImageID" value="' . $row['ImageID'] . '">';
+                        echo '<button type="submit" name="viewImg" value="View">';
+                        echo '</form>';
 
-            echo '<form action="/COMP-3512-A2/photo-browser.php" method="post">';
-            echo '<input type="hidden" name="path" value="' . $row['Path']. '">';
-            if ($isCountry == 1){
-                echo '<input type="hidden" name="countrySearch" value="' . $searchValue . '">';
-            }
-            elseif ($isCountry == 0){
-                echo '<input type="hidden" name="citySearch" value="' . $searchValue . '">';
-            }elseif ($isCountry == 2){
-                echo '<input type="hidden" name="titleSearch value="' . $searchValue . '">';
-            } 
-            echo '<input type="submit" name="fav" value="Add to Favorites">';
-            echo '</form>';
-            //Put add to favorite
-            echo '</div>';
-        }
-    }
+                        echo '<form action="photo-browser.php" method="post">';
+                        echo '<input type="hidden" name="path" value="' . $row['Path']. '">';
+                        if ($isCountry == 1){
+                            echo '<input type="hidden" name="countrySearch" value="' . $searchValue . '">';
+                        }elseif ($isCountry == 0){
+                            echo '<input type="hidden" name="citySearch" value="' . $searchValue . '">';
+                        }elseif ($isCountry == 2){
+                            echo '<input type="hidden" name="titleSearch value="' . $searchValue . '">';
+                        } 
+                        echo '<button type="submit" name="fav" value="Add to Favorites">';
+                        echo '</form>';
+                        echo '</div>';
+                    }
+                }
+                
+                function photoSQLSearch($sql, $conn, $searchValue){
+                    $findPhotoSQL = $sql;
+                    $stmt = mysqli_stmt_init($conn);                    
+    
+                    if(!mysqli_stmt_prepare($stmt, $findPhotoSQL)){
+                        header("Location: index.php?error=sqlerror");
+                        exit();
+                    }else{
+                        mysqli_stmt_prepare($stmt, $findPhotoSQL);
+                        mysqli_stmt_bind_param($stmt, "s", $searchValue);
+                        mysqli_stmt_execute($stmt);
+                        $searchedImage = mysqli_stmt_get_result($stmt);
+                    }
+                        mysqli_stmt_close($stmt);        
+                        return $searchedImage;
+                }   
 
   ?>
-    </div>
+        </div>
 
 </main>
 
