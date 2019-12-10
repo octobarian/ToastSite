@@ -1,5 +1,6 @@
 <?php
 require 'includes/dbh.inc.php';
+require 'header.php';
 
 if ($conn->connect_error) {
     exit("Error connecting to the database");
@@ -89,9 +90,9 @@ mysqli_close($conn);
     <link rel="stylesheet" href="css/filter-list.css">
 </head>
 
-<header>
+<!-- <header>
     <h1>COMP 3512 Assignment 2 - City Page</h1>
-</header>
+</header> -->
 
 <body>
     <div class='main-container'>

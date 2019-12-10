@@ -1,6 +1,7 @@
 <?php
 require 'includes/dbh.inc.php';
 require 'includes/single-country.inc.php';
+require 'header.php';
 
 function populateCountryDetails($c)
 {
@@ -57,9 +58,9 @@ function populateCountryDetails($c)
     <link rel="stylesheet" href="css/filter-list.css">
 </head>
 
-<header>
+<!-- <header>
     <h1>COMP 3512 Assignment 2 - Country Page</h1>
-</header>
+</header> -->
 
 <body>
     <div class='main-container'>
