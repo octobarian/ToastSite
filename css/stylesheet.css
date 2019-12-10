@@ -55,7 +55,7 @@ main {
     margin-top: 15px;
     margin-left: 10%;
     margin-right: 10%;
-    padding-bottom: 6%;
+    padding-bottom: 15%;
 }
 
 .wrapper-main{
@@ -102,6 +102,8 @@ main {
 .homebox .uinfo{
     grid-area: uinfo;
     background-color: var(--colour-dark);
+    width: 100%;
+    height: auto;
 
 }
 .homebox .search{
