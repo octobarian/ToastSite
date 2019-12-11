@@ -2,6 +2,9 @@
 session_start();
 ?>
 
+<!-- https://www.w3schools.com/howto/howto_js_topnav_responsive.asp
+Responsive Hamburger menu based on W3schools reponsive menu with additions -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +21,11 @@ body {
 .topnav {
   overflow: hidden;
   background-color: grey;
+  
 }
 
 .topnav a {
   float: left;
-  display: block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -35,18 +38,12 @@ body {
   color: black;
 }
 
-.topnav a.active {
-  background-color: var(--colour-special);
-  color: white;
-}
-
 .topnav .icon {
   display: none;
 }
 
 
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
     float: right;
@@ -55,7 +52,7 @@ body {
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;

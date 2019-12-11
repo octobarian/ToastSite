@@ -6,52 +6,59 @@ require "includes/dbh.inc.php";
 <main style="background-color: lightslategray">
     <div id="favList">
         <?php
-        if (isset($_SESSION['favPhotos'])) {
-            if (sizeof($_SESSION['favPhotos']) > 0) {
+        if(!empty($_SESSION)){
+                if (isset($_SESSION['favPhotos'])) {
+                    if (sizeof($_SESSION['favPhotos']) > 0) {
 
-                echo '<div>';
-                echo '<h1>Favorite Photos</h1>';
-                echo '<form action="" method="post">';
-                echo '<input class="btn" type="submit" name="removeAll" value="Remove ALL from Favorites">';
-                echo '</form>';
-                echo '</div>';
-                foreach ($_SESSION['favPhotos'] as $i) {
+                        echo '<div>';
+                        echo '<h1>Favorite Photos</h1>';
+                        echo '<form action="" method="post">';
+                        echo '<input class="btn" type="submit" name="removeAll" value="Remove ALL from Favorites">';
+                        echo '</form>';
+                        echo '</div>';
+                        foreach ($_SESSION['favPhotos'] as $i) {
 
-                    if ($conn->connect_error) {
-                        exit('Error connecting to the database');
-                    }
+                            if ($conn->connect_error) {
+                                exit('Error connecting to the database');
+                            }
 
-                    $sql = "SELECT * FROM imagedetails WHERE Path=?";
-                    $stmt = mysqli_stmt_init($conn);
+                            $sql = "SELECT * FROM imagedetails WHERE Path=?";
+                            $stmt = mysqli_stmt_init($conn);
 
-                    if (!mysqli_stmt_prepare($stmt, $sql)) {
-                        header("Location: ../index.php?error=sqlerror");
-                        exit();
-                    } else {
-                        if ($i != null) {
-                            mysqli_stmt_prepare($stmt, $sql);
-                            mysqli_stmt_bind_param($stmt, "s", $i);
-                        } else {
-                            header("Location: //index.php?error=invalidFavoriteImage");
+                            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                                header("Location: ../index.php?error=sqlerror");
+                                exit();
+                            } else {
+                                if ($i != null) {
+                                    mysqli_stmt_prepare($stmt, $sql);
+                                    mysqli_stmt_bind_param($stmt, "s", $i);
+                                } else {
+                                    header("Location: //index.php?error=invalidFavoriteImage");
+                                }
+
+                                mysqli_stmt_execute($stmt);
+                                $result = mysqli_stmt_get_result($stmt);
+                                $id = mysqli_fetch_assoc($result);
+                            }
+                            mysqli_stmt_close($stmt);
+                            echo '<div>';
+                            echo '<h5>' . $id['Title'] . '</h5>';
+                            echo '<a href="single-photo.php?ImageID=' . $id['ImageID'] . '">';
+                            $img = '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/small320/' . $i . '">';
+                            echo $img;
+                            echo '</a>';
+                            createRemove($i);
+                            echo '</div>';
                         }
-
-                        mysqli_stmt_execute($stmt);
-                        $result = mysqli_stmt_get_result($stmt);
-                        $id = mysqli_fetch_assoc($result);
+                    } else {
+                        echo '<h1>No Favorites Saved</h1>';
                     }
-                    mysqli_stmt_close($stmt);
-                    echo '<div>';
-                    echo '<h5>' . $id['Title'] . '</h5>';
-                    echo '<a href="single-photo.php?ImageID=' . $id['ImageID'] . '">';
-                    $img = '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/small320/' . $i . '">';
-                    echo $img;
-                    echo '</a>';
-                    createRemove($i);
-                    echo '</div>';
+                }else{
+                    echo '<h1>No Favorites Saved</h1>';
                 }
-            } else {
-                echo '<h1>No Favorites Saved</h1>';
             }
+            else{
+            echo '<h1>Not Logged In</h1>';
         }
 
         ?>
