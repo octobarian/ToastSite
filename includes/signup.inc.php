@@ -35,7 +35,7 @@ function createUTable($userID,$fname,$lname,$uCity,$uCountry)
                      mysqli_stmt_bind_param($stmt,"sssss", $userID,$fname,$lname, $uCity, $uCountry);
                     //execute the data into the database
                     mysqli_stmt_execute($stmt);
-                    header("Location: ../signup.php?signup=success&userID=".$userID."&UserCity=".$uCity);
+                    header("Location: ../index.php?signup=success&userID=".$userID."&UserCity=".$uCity);
                     exit();
                 }
 
