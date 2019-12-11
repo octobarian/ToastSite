@@ -109,7 +109,7 @@ mysqli_stmt_close($stmt);
 mysqli_close($conn);
 
 
-require "header.php";
+require "header-2.php";
 ?>
 
 <link rel="stylesheet" href="css/singlephoto.css">
