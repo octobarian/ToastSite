@@ -107,5 +107,4 @@ if ($neighbours != null) {
     echo "<li>No Neighbours To Display</li>";
 }
 
-//Close the connection
-mysqli_close($conn);
+//mysqli_close($conn);
