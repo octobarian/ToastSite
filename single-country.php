@@ -15,21 +15,11 @@ require 'includes/single-country.inc.php';
         <?php require 'includes/country-filter-list.php'; ?>
 
         <div class='details-container'>
-            <h1>Current Country: <span id="main-area-name"><?php echo $countryRow['CountryName']; ?></span></h1>
-            <h1>
-                <?php
-                if (isset($contiFilter)) {
-                    while ($contiRow = mysqli_fetch_assoc($contiFilter)) {
-                        echo "<li>" . $contiRow['CountryName'] . "</li>";
-                    }
-                }
-                ?>
-            </h1>
+            <h1><span id="main-area-name"><?php echo $countryRow['CountryName']; ?></span></h1>
+            <h1></h1>
             <div id='country-details'>
                 <!-- All of the data for the selected country -->
                 <?php
-
-                //populateCountryDetails($countryRow);
 
                 echo "<section class='details-list-section'>";
                 echo "<label>Area:</label>";
@@ -61,7 +51,7 @@ require 'includes/single-country.inc.php';
             </div><br>
             <div id='country-city-list'>
                 <!-- List of cities within the selected country-->
-                <h1>List Of Cities Located In: <?php echo $countryRow['CountryName']; ?></h1>
+                <h1>Cities In: <?php echo $countryRow['CountryName']; ?></h1>
                 <ul id='cities-list'>
                     <?php
                     if ($cityRow != null) {
