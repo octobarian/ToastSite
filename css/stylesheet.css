@@ -20,7 +20,6 @@
 
 .header-logo {
     float: left;
-    margin-top: 10px;
 }
 
 .nav-header-main li {
@@ -66,6 +65,10 @@ main {
 
 .top{
     background-color: var(--colour-dark);
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .homebox {
