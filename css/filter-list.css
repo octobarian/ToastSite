@@ -142,13 +142,19 @@ summary {
         grid-template-columns: 100%;
         grid-template-rows: 25% 40% 35%;
     }
+
     .country-container{
         grid-column: 1/2;
         grid-row: 1/2;
     }
 
+    #country-filter{
+        width: 90%;
+    }
+
     #country-list{
         height: 5em;
+        width: 90%;
     }
 
     .details-container{
