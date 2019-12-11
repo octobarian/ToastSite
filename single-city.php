@@ -18,41 +18,23 @@ require 'includes/single-city.inc.php';
         <?php require 'includes/country-filter-list.php'; ?>
 
         <div class='details-container'>
-            <h1>Current City: <span id="main-area-name"><?php echo $cityRow['AsciiName']; ?></span></h1>
+            <h1><span id="main-area-name"><?php echo $cityRow['AsciiName']; ?></span></h1>
             <div id='city-details'>
                 <!-- All of the data for the selected country -->
                 <?php
                 echo "<section class='details-list-section'>";
-                echo "<label>Area:</label>";
-                echo "<span id='country-area'>" . $countryRow['Area'] . "</span>";
                 echo "<label>Population:</label>";
-                echo "<span id='country-pop'>" . $cityRow['Population'] . "</span>";
-                echo "<label>Capital City:</label>";
-                echo "<span id='country-cap'>" . $countryRow['Capital'] . "</span>";
-                echo "<label>Currency Name:</label>";
-                echo "<span id='country-curr-name'>" . $countryRow['CurrencyName'] . "</span>";
-                echo "<label>Currency Code:</label>";
-                echo "<span id='country-curr-code'>" . $countryRow['CurrencyCode'] . "</span>";
-                echo "<label>Domain:</label>";
-                echo "<span id='country-dom'>" . $countryRow['TopLevelDomain'] . "</span>";
-                echo "<label>Languages:</label>";
-                echo "<span id='country-lang'>" . $countryRow['Languages'] . "</span>";
-
-                echo "<label>Neighbours:</label>";
-                echo "<span id='country-neig'>";
-                foreach ($currentCountryNeigh as $value) {
-                    echo $value . " ";
-                }
-                echo "</span>";
-
-                echo "<label>Description:</label>";
-                echo "<span id='country-desc'>" . $countryRow['CountryDescription'] . "</span>";
+                echo "<span id='city-pop'>" . $cityRow['Population'] . "</span>";
+                echo "<label>Elevation:</label>";
+                echo "<span id='city-elev'>" . $cityRow['Elevation'] . "</span>";
+                echo "<label>Timezone:</label>";
+                echo "<span id='city-timezone'>" . $cityRow['TimeZone'] . "</span>";
                 echo "</section>";
                 ?>
             </div>
 
             <div class='city-map-container'>
-                <h1>City Map</h1>
+                <h1>City Location Map</h1>
                 <div id='city-map'>
                     <!-- Map of the selected city -->
                     <?php
