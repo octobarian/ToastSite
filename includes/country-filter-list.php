@@ -19,19 +19,17 @@ if (!mysqli_stmt_prepare($stmt, $conti)) {
 
 <div class='country-container'>
     <h1>Country Filters</h1>
-    <ul id='country-filter'>
-        <div id='continent-filter'>
-            <!--<form action="single-country.php" method="GET">
-                <select name='contTest'>
-                    <?php
-                    // while ($continentsRow = mysqli_fetch_assoc($continents)) {
-                    //     echo "<option value='" . $continentsRow['ContinentCode'] .  "'>" . $continentsRow['ContinentName'] . "</option>";
-                    // }
-                    ?>
-                </select>
-                <input type='submit' name='submitContinent' />
-            </form> -->
-        </div>
+    <div id='continent-filter'>
+        <select id='continent-list'>
+            <?php
+            while ($continentsRow = mysqli_fetch_assoc($continents)) {
+                echo "<option value='" . $continentsRow['ContinentCode'] .  "'>" . $continentsRow['ContinentName'] . "</option>";
+            }
+            ?>
+        </select>
+        <button id='continentButton' type='button' onclick='selectContinent()'>Submit</button>
+    </div>
+    <ul>
         <!-- Add the filter options for countries here -->
     </ul>
     <h1>Countries List</h1>
