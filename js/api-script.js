@@ -29,6 +29,7 @@ document.querySelector('#country-list').addEventListener('click', (e) => {
 function fetchAPIData() {
     const countriesAPI = '../api-countries.php';
     const citiesAPI = '../api-cities.php';
+    console.log("after api: " + citiesAPI);
 
     if (localStorage.getItem('Countries') == null) {
         fetch(countriesAPI, {
@@ -43,6 +44,8 @@ function fetchAPIData() {
                 });
 
                 localStorage.setItem('Countries', JSON.stringify(sortedCountries));
+
+                console.log("LocalStorage Setting");
             })
             .then(() => loadCountries(getCountry()))
             .catch(() => console.log("ERROR: api - countries.php fetch"))
@@ -84,6 +87,7 @@ function getCity() {
 
 //Populate Countries On Initial Country Page Load
 function loadCountries(countries) {
+    console.log("loadCountries Function");
     for (let c of countries) {
 
         //Adds the countries into the li element

@@ -32,16 +32,11 @@ if (!mysqli_stmt_prepare($stmt, $conti)) {
                 <input type='submit' name='submitContinent' />
             </form> -->
         </div>
-        <div id=''></div>
-        <?php
-
-        ?>
         <!-- Add the filter options for countries here -->
     </ul>
     <ul id='country-list'>
         <!-- All of the countries will be populated here as list items -->
-
         <!-- Get's the list of cities -->
-        <form method="GET" action="toastsite.herokuapp.com/single-country.php"></form>
+        <form method="GET" action="single-country.php"></form>
     </ul>
 </div>
