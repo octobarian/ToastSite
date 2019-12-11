@@ -149,11 +149,12 @@ summary {
     }
 
     #country-filter{
+        height: 7em;
         width: 90%;
     }
 
     #country-list{
-        height: 5em;
+        height: 8em;
         width: 90%;
     }
 
