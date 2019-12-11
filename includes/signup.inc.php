@@ -21,10 +21,10 @@ function returnUID($email){
                 }
 }
 
-function createUTable($userID,$fname,$lname,$uCity,$uCountry,$email)
+function createUTable($userID,$fname,$lname,$uCity,$uCountry)
 {
     include "dbh.inc.php";
-    $sql = "INSERT INTO users (UserID,FirstName,LastName,City,Country,Email) VALUES (?,?,?,?,?,?)";
+    $sql = "INSERT INTO users (UserID,FirstName,LastName,City,Country) VALUES (?,?,?,?,?)";
                 $stmt = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt,$sql)){
                     header("Location: ../signup.php?error=sqlerror3");
@@ -32,7 +32,7 @@ function createUTable($userID,$fname,$lname,$uCity,$uCountry,$email)
                 }
                 else{
                     //first, dealing with password, i need to HASH the password first
-                     mysqli_stmt_bind_param($stmt,"sssss", $userID,$fname,$lname, $uCity, $uCountry,$email);
+                     mysqli_stmt_bind_param($stmt,"sssss", $userID,$fname,$lname, $uCity, $uCountry);
                     //execute the data into the database
                     mysqli_stmt_execute($stmt);
                     header("Location: ../signup.php?signup=success&userID=".$userID."&UserCity=".$uCity);
@@ -125,7 +125,7 @@ if(isset($_POST['signup-submit'])){
                         mysqli_stmt_execute($stmt);
                         $result = mysqli_stmt_get_result($stmt);
                         $userID = returnUID($email);
-                        createUTable($userID,$fname,$lname,$uCity,$uCountry,$email);
+                        createUTable($userID,$fname,$lname,$uCity,$uCountry);
                 }
             }
         }
