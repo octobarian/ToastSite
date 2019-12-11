@@ -71,6 +71,8 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
     $photo = mysqli_stmt_get_result($stmt);
     $photoRow = mysqli_fetch_assoc($photo);
 }
+mysqli_stmt_close($stmt);
+
 
 //-----NEIGHBOURS MATCHING------------------------------------------------------------------------------
 
@@ -105,23 +107,5 @@ if ($neighbours != null) {
     echo "<li>No Neighbours To Display</li>";
 }
 
-// if (isset($_GET['submitContinent'])) {
-//     $selectedContinent = $_GET['contTest'];
-
-//     $continentFilter = "SELECT * FROM countries WHERE Continent=?";
-//     $stmt = mysqli_stmt_init($conn);
-//     if (!mysqli_stmt_prepare($stmt, $continentFilter)) {
-//         header("Location: ../index.php?error=continents-search-sql-error");
-//         exit();
-//     } else {
-//         if ($selectedContinent != null) {
-//             mysqli_stmt_prepare($stmt, $continentFilter);
-//             mysqli_stmt_bind_param($stmt, "s", $selectedContinent);
-//             mysqli_stmt_execute($stmt);
-//             $contiFilter = mysqli_stmt_get_result($stmt);
-//         } else {
-//             header("Location: //index.php?error=no-continent-passed");
-//         }
-//     }
-// }
-// mysqli_stmt_close($stmt);
+//Close the connection
+mysqli_close($conn);
