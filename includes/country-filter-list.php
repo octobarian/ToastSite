@@ -18,8 +18,8 @@ if (!mysqli_stmt_prepare($stmt, $conti)) {
 
 
 <div class='country-container'>
+    <h1>Country Filters</h1>
     <ul id='country-filter'>
-        <h1>PLACEHOLDER FOR FILTERS</h1>
         <div id='continent-filter'>
             <!--<form action="single-country.php" method="GET">
                 <select name='contTest'>
@@ -34,6 +34,7 @@ if (!mysqli_stmt_prepare($stmt, $conti)) {
         </div>
         <!-- Add the filter options for countries here -->
     </ul>
+    <h1>Countries List</h1>
     <ul id='country-list'>
         <!-- All of the countries will be populated here as list items -->
         <!-- Get's the list of cities -->
