@@ -8,8 +8,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-html,
-body,
+
 div,
 h1,
 h2,
@@ -27,14 +26,6 @@ summary {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-}
-
-/* Centers the header */
-header {
-    text-align: center;
-    font-size: 2em;
-    padding: 0.5em;
-    border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
 /*
@@ -98,12 +89,9 @@ header {
     align-content: center;
 }
 
-#cities-list {
-    height: 30em;
-    width: 100%;
-    margin-right: 0;
-    overflow-y: scroll;
-    align-content: center;
+/* Changes the Country Filter + List Names */
+.country-container>h1 {
+    font-size: 145%;
 }
 
 /* 
@@ -124,12 +112,26 @@ header {
 .details-container>h1,
 #country-city-list>h1,
 .city-map-container>h1 {
-    font-size: 140%;
+    font-size: 150%;
 }
 
 /* Makes the selected country's name bold */
 #main-area-name {
     font-weight: 700;
+    font-size: 200%;
+}
+
+/* Creates scroll list for cities */
+#cities-list {
+    height: 15em;
+    width: 92%;
+    margin-right: 0;
+    overflow-y: scroll;
+    display: grid;
+    align-content: center;
+    padding: 1.75em;
+    background-color: #fafafa;
+    border-radius: 1em;
 }
 
 /* 
@@ -138,5 +140,5 @@ header {
 
 /* Increases font size of country and city photo title */
 .country-photo-container>h1 {
-    font-size: 140%;
+    font-size: 150%;
 }
