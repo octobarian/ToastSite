@@ -64,6 +64,10 @@ main {
     margin: 0 auto;
 }
 
+.top{
+    background-color: var(--colour-dark);
+}
+
 .homebox{
     justify-content: center;
     justify-items: center;
@@ -83,6 +87,17 @@ main {
     "box box box box";
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 4%;
+}
+
+.aboutEXT{
+    justify-content: center;
+    justify-items: center;
+    display:grid;
+    grid-template-areas:
+    " box box box ";
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 4%;
+    background-color: var(--colour-dark);
 }
 
 .about h1,h2,h3
@@ -185,4 +200,5 @@ button[type=submit], .btn {
       font-size: 5em;
       font-family: Arial, Helvetica, sans-serif;
   }
+
 
