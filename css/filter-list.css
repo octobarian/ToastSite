@@ -137,3 +137,10 @@ summary {
 .country-photo-container>h1 {
     font-size: 150%;
 }
+@media screen and (min-width: 960px) {
+    .main-container{
+        grid-template-columns: 100%;
+        grid-template-rows: 25% 40% 35%;
+    }
+
+}
