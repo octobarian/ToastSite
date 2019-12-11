@@ -39,34 +39,82 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 function displayDetails(info) {
-    let exif = JSON.parse(info.Exif);
-    let loc = document.querySelector("#details");
-    let model = document.createElement("p");
-    let exposure = document.createElement("p");
-    let aperture = document.createElement("p");
-    let focalLength = document.createElement("p");
-    let iso = document.createElement("p");
+    if (info.Exif != null) {
+        let exif = JSON.parse(info.Exif);
+        let loc = document.querySelector("#details");
+        let model = document.createElement("p");
+        let exposure = document.createElement("p");
+        let aperture = document.createElement("p");
+        let focalLength = document.createElement("p");
+        let iso = document.createElement("p");
 
-    model.textContent = "Make: " + exif.model;
-    loc.appendChild(model);
+        model.textContent = "Make: " + exif.model;
+        loc.appendChild(model);
 
-    exposure.textContent = "Exposure: " + exif.exposure_time;
-    loc.appendChild(exposure);
+        exposure.textContent = "Exposure: " + exif.exposure_time;
+        loc.appendChild(exposure);
 
-    aperture.textContent = "Aperture: " + exif.aperture;
-    loc.appendChild(aperture);
+        aperture.textContent = "Aperture: " + exif.aperture;
+        loc.appendChild(aperture);
 
-    focalLength.textContent = "Focal Length: " + exif.focal_length;
-    loc.appendChild(focalLength);
+        focalLength.textContent = "Focal Length: " + exif.focal_length;
+        loc.appendChild(focalLength);
 
-    iso.textContent = "ISO: " + exif.iso;
-    loc.appendChild(iso);
+        iso.textContent = "ISO: " + exif.iso;
+        loc.appendChild(iso);
 
-    let colors = JSON.parse(info.Colors);
+        let colors = JSON.parse(info.Colors);
 
-    colors.forEach(c => {
-        let span = document.createElement("span");
-        span.style.backgroundColor = c;
-        loc.appendChild(span);
-    })
+        colors.forEach(c => {
+            let span = document.createElement("span");
+            span.style.backgroundColor = c;
+            loc.appendChild(span);
+        })
+    } else {
+        let loc = document.querySelector("#details");
+        let noInfo = document.createElement("p");
+        noInfo.textContent = "No Detail Information for this Photo!";
+        loc.appendChild(noInfo);
+    }
+}
+
+function displayHover(info) {
+    if (info.Exif != null) {
+
+        let exif = JSON.parse(info.Exif);
+        let loc = document.querySelector("#hoverInfo");
+        let model = document.createElement("p");
+        let exposure = document.createElement("p");
+        let aperture = document.createElement("p");
+        let focalLength = document.createElement("p");
+        let iso = document.createElement("p");
+
+        model.textContent = "Make: " + exif.model;
+        loc.appendChild(model);
+
+        exposure.textContent = "Exposure: " + exif.exposure_time;
+        loc.appendChild(exposure);
+
+        aperture.textContent = "Aperture: " + exif.aperture;
+        loc.appendChild(aperture);
+
+        focalLength.textContent = "Focal Length: " + exif.focal_length;
+        loc.appendChild(focalLength);
+
+        iso.textContent = "ISO: " + exif.iso;
+        loc.appendChild(iso);
+
+        let colors = JSON.parse(info.Colors);
+
+        colors.forEach(c => {
+            let span = document.createElement("span");
+            span.style.backgroundColor = c;
+            loc.appendChild(span);
+        })
+    } else {
+        let loc = document.querySelector("#hoverInfo");
+        let noInfo = document.createElement("p");
+        noInfo.textContent = "No Detail Information for this Photo!";
+        loc.appendChild(noInfo);
+    }
 }
