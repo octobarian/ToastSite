@@ -105,6 +105,7 @@ if ($neighbours != null) {
     echo "<li>No Neighbours To Display</li>";
 }
 
+<<<<<<< Updated upstream
 // if (isset($_GET['submitContinent'])) {
 //     $selectedContinent = $_GET['contTest'];
 
@@ -125,3 +126,7 @@ if ($neighbours != null) {
 //     }
 // }
 // mysqli_stmt_close($stmt);
+=======
+//Close the connection
+//mysqli_close($conn);
+>>>>>>> Stashed changes
