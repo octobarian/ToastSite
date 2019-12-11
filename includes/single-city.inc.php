@@ -61,7 +61,7 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
         mysqli_stmt_prepare($stmt, $photoList);
         mysqli_stmt_bind_param($stmt, "i", $cityRow['CityCode']);
     } else {
-        header("Location: ../single-country.php?ISO=CA&AsciiName=Calgary");
+        header("Location: ../single-city.php?ISO=CA&AsciiName=Calgary");
     }
 
     mysqli_stmt_execute($stmt);
