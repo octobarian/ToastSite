@@ -189,3 +189,27 @@ function selectContinent() {
 
 //Only show countries that have photos 
 function countryWithPhotos() {}
+
+function hideFilters() {
+    let select = document.querySelector('#continent-filter');
+    select.style.display = 'none';
+    document.querySelector('#hide').style.display = 'none';
+    document.querySelector('#show').style.display = 'block';
+}
+
+function showFilters() {
+    let select = document.querySelector('#continent-filter');
+    select.style.display = 'block';
+    document.querySelector('#hide').style.display = 'block';
+    document.querySelector('#show').style.display = 'none';
+}
+
+function showImages(imageArr) {
+    let imagesOnly = [];
+    getCountry().forEach(c => {
+        if (imageArr.includes(c.ISO)) {
+            imagesOnly.push(c);
+        }
+    })
+    loadCountries(imagesOnly);
+}
