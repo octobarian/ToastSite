@@ -12,7 +12,7 @@ document.querySelector('#country-list').addEventListener('click', (e) => {
     //Prevents console.log from blipping 
     e.preventDefault();
 
-    window.location.href = "single-country.php" + e.target.search;
+    window.location.href = "../single-country.php" + e.target.search;
 
     console.log(window.location.href);
 
@@ -27,8 +27,8 @@ document.querySelector('#country-list').addEventListener('click', (e) => {
 //-----LOCAL STORAGE FETCH FUNCTIONS-------------------------------------------------------------------------------
 
 function fetchAPIData() {
-    const countriesAPI = './api-countries.php';
-    const citiesAPI = './api-cities.php';
+    const countriesAPI = '../api-countries.php';
+    const citiesAPI = '../api-cities.php';
 
     if (localStorage.getItem('Countries') == null) {
         fetch(countriesAPI, {
@@ -95,7 +95,7 @@ function loadCountries(countries) {
         newLink.textContent = c.CountryName;
 
         //Sets attribute to <a href=''> link
-        newLink.setAttribute("href", "single-country.php?ISO=" + c.ISO);
+        newLink.setAttribute("href", "../single-country.php?ISO=" + c.ISO);
 
         //DO NOT REMOVE, COUNTRIES LIST WON'T WORK WITHOUT
         //newLink.setAttribute("id", c.ISO);
