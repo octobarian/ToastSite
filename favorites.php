@@ -1,5 +1,5 @@
 <?php
-require "header.php";
+require "header-2.php";
 require "includes/dbh.inc.php";
 ?>
 
