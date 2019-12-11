@@ -195,6 +195,7 @@ function hideFilters() {
     select.style.display = 'none';
     document.querySelector('#hide').style.display = 'none';
     document.querySelector('#show').style.display = 'block';
+    loadCountries(getCountry());
 }
 
 function showFilters() {
