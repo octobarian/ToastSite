@@ -71,7 +71,7 @@ else{
 }
 mysqli_stmt_close($stmt);
 
-require "header.php";
+require "header-2.php";
 ?>
 <link rel="stylesheet" type="text/css" href="css/photo-browser.css">
 <main>

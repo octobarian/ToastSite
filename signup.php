@@ -1,5 +1,5 @@
 <?php
-    require "header.php";
+    require "header-2.php";
 ?>
 
     <main>

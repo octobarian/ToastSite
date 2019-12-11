@@ -1,6 +1,6 @@
 <?php
 require 'includes/dbh.inc.php';
-require 'header.php';
+require 'header-2.php';
 
 require 'includes/single-country.inc.php';
 ?>
