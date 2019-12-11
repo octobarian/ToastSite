@@ -1,9 +1,55 @@
 <?php
+
+function returnUID($email){
+            include "dbh.inc.php";
+            $sql = "SELECT * FROM userslogin WHERE UserName = ?";
+            $stmt = mysqli_stmt_init($conn);
+            if(!mysqli_stmt_prepare($stmt, $sql)){
+                //statment not allowed to prevent injection attacks
+                header("Location: ../index.php?error=sqlerror");
+                exit();
+            }
+            else{
+                //execute the good command
+                mysqli_stmt_bind_param($stmt, "s", $email);
+                mysqli_stmt_execute($stmt);
+                //$RESULT = THE STORED PASS
+                $result=mysqli_stmt_get_result($stmt);
+                if($row=mysqli_fetch_assoc($result)){
+                //is there actual data?
+                return $row["UserID"];}
+                }
+}
+
+function createUTable($userID,$fname,$lname,$uCity,$uCountry,$email)
+{
+    include "dbh.inc.php";
+    $sql = "INSERT INTO users (UserID,FirstName,LastName,City,Country,Email) VALUES (?,?,?,?,?,?)";
+                $stmt = mysqli_stmt_init($conn);
+                if(!mysqli_stmt_prepare($stmt,$sql)){
+                    header("Location: ../signup.php?error=sqlerror3");
+                    exit();
+                }
+                else{
+                    //first, dealing with password, i need to HASH the password first
+                     mysqli_stmt_bind_param($stmt,"sssss", $userID,$fname,$lname, $uCity, $uCountry,$email);
+                    //execute the data into the database
+                    mysqli_stmt_execute($stmt);
+                    header("Location: ../signup.php?signup=success&userID=".$userID."&UserCity=".$uCity);
+                    exit();
+                }
+
+}
+
 if(isset($_POST['signup-submit'])){
     //create database connection, $conn is the database if it works
     require 'dbh.inc.php';
     //grab the user info from the signup form
     $username = $_POST['uid'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $uCity = $_POST['ucity'];
+    $uCountry = $_POST['ucountry'];
     $email = $_POST['mail'];
     $password = $_POST['pwd'];
     $passwordRepeat = $_POST['pwd-repeat'];
@@ -69,16 +115,27 @@ if(isset($_POST['signup-submit'])){
                      mysqli_stmt_bind_param($stmt,"ss", $email, $hashedPwd );
                     //execute the data into the database
                     mysqli_stmt_execute($stmt);
-                    header("Location: ../signup.php?signup=success");
-                    exit();
+                    $sql2 = "SELECT UserID FROM userslogin WHERE UserName=?";
+                    if(!mysqli_stmt_prepare($stmt,$sql2)){
+                        header("Location: ../signup.php?error=sqlerror3");
+                        exit();
+                    }
+                    else{
+                        mysqli_stmt_bind_param($stmt, "s", $email);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+                        $userID = returnUID($email);
+                        createUTable($userID,$fname,$lname,$uCity,$uCountry,$email);
                 }
             }
         }
     }
     mysqli_stmt_close($stmt);
     mysql_close($conn);
-}
+}}
 else{
     header("Location: ../signup.php");
     exit();
 }
+
+?>
