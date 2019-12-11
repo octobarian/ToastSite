@@ -21,13 +21,15 @@ if (!mysqli_stmt_prepare($stmt, $conti)) {
     <h1>Country Filters</h1>
     <div id='continent-filter'>
         <select id='continent-list'>
+            <option value="invalid">Select a Continent</option>
             <?php
             while ($continentsRow = mysqli_fetch_assoc($continents)) {
                 echo "<option value='" . $continentsRow['ContinentCode'] .  "'>" . $continentsRow['ContinentName'] . "</option>";
             }
             ?>
         </select>
-        <button id='continentButton' type='button' onclick='selectContinent()'>Submit</button>
+        <button class="btn" id='continentButton' type='button' onclick='selectContinent()'>Submit</button>
+        <button class="btn" id='reset' type='button' onclick='reset()'>Reset</button>
     </div>
     <ul>
         <!-- Add the filter options for countries here -->
