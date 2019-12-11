@@ -10,7 +10,7 @@ require "includes/dbh.inc.php";
                 if (isset($_SESSION['favPhotos'])) {
                     if (sizeof($_SESSION['favPhotos']) > 0) {
 
-                        echo '<div>';
+                        echo '<div id="favoriteHeader">';
                         echo '<h1>Favorite Photos</h1>';
                         echo '<form action="" method="post">';
                         echo '<input class="btn" type="submit" name="removeAll" value="Remove ALL from Favorites">';
@@ -41,14 +41,14 @@ require "includes/dbh.inc.php";
                                 $id = mysqli_fetch_assoc($result);
                             }
                             mysqli_stmt_close($stmt);
-                            echo '<div>';
-                            echo '<h5>' . $id['Title'] . '</h5>';
-                            echo '<a href="single-photo.php?ImageID=' . $id['ImageID'] . '">';
+                            echo '<div class = "favoriteItem">';
+                            echo '<div id = "favoritePhoto"><a href="single-photo.php?ImageID=' . $id['ImageID'] . '">';
                             $img = '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/small320/' . $i . '">';
                             echo $img;
-                            echo '</a>';
+                            echo '</a></div>';
+                            echo '<div id="favoritePhotoTitle"><h5>' . $id['Title'] . '</h5></div><div id="removeButton">';
                             createRemove($i);
-                            echo '</div>';
+                            echo '</div></div>';
                         }
                     } else {
                         echo '<h1>No Favorites Saved</h1>';
