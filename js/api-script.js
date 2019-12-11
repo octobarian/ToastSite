@@ -78,6 +78,8 @@ function getCity() {
 
 //Populate Countries On Initial Country Page Load
 function loadCountries(countries) {
+    document.querySelector("#country-list form").innerHTML = "";
+
     for (let c of countries) {
 
         //Adds the countries into the li element
@@ -133,27 +135,18 @@ function findMatches(wordToMatch, country) {
 
 //Reverts all of the filters
 function reset() {
-    let colMid = document.querySelector(".mid");
-    let colRight = document.querySelector(".right");
-    let cityList = document.querySelector("#citiesList ul");
-    let cityBlock = document.querySelector("#citiesList");
-    let base = document.querySelector("#base");
-
     //https://stackoverflow.com/questions/12737528/reset-the-value-of-a-select-box
-    let select = document.querySelector("#selected");
-    colMid.style.display = "none";
-    colRight.style.display = "none";
-    cityBlock.style.display = "none";
-    base.style.display = "block";
-    cityList.innerHTML = "";
+    let select = document.querySelector("#continent-list");
+
     select.selectedIndex = 0;
 
-    printCountries(JSON.parse(localStorage.getItem("countriesData")));
+    loadCountries(getCountry());
 }
 
 /**
  * Continent filter
  */
+
 //Displays the countries for which continent was chosen
 function selectFilter() {
     let select = document.querySelector("#selected");
@@ -183,31 +176,15 @@ document.querySelector('#continentButton').addEventListener('click', (e) => {
                 contArray.push(g);
             }
         }
-        console.log(contArray);
-
-        let list = document.querySelector('#country-list');
-        list.innerHTML = "";
-        let newForm = document.createElement('form');
-        newForm.setAttribute('method', 'GET');
-        newForm.setAttribute('action', 'single-country.php');
-        list.appendChild(newForm);
-
-        contArray.forEach(c => {
-            let li = document.createElement("li");
-            let a = document.createElement("a");
-            a.setAttribute('href', `../single-country.php?ISO=${c.ISO}`);
-            a.textContent = c.CountryName;
-            newForm.appendChild(li);
-            li.appendChild(a);
-        })
+        loadCountries(contArray);
     }
-
-
 })
 
 //Returns the value of the selected continent
 function selectContinent() {
-    return document.querySelector('#continent-list').value;
+    if (document.querySelector('#continent-list').value == "invalid") {} else {
+        return document.querySelector('#continent-list').value;
+    }
 }
 
 //Only show countries that have photos 
