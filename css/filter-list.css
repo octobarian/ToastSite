@@ -127,11 +127,6 @@ summary {
     width: 92%;
     margin-right: 0;
     overflow-y: scroll;
-    display: grid;
-    align-content: center;
-    padding: 1.75em;
-    background-color: #fafafa;
-    border-radius: 1em;
 }
 
 /* 
