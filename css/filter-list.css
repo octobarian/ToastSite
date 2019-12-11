@@ -142,5 +142,16 @@ summary {
         grid-template-columns: 100%;
         grid-template-rows: 25% 40% 35%;
     }
-
+    .country-container{
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+    .details-container{
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+    .country-photo-container{
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
 }
