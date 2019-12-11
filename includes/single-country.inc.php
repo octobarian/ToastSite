@@ -64,7 +64,7 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
         mysqli_stmt_prepare($stmt, $photoList);
         mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
     } else {
-        header("Location: /GitHub/COMP-3512-A2/single-country.php?ISO=CA");
+        header("Location: ./single-country.php?ISO=CA");
     }
 
     mysqli_stmt_execute($stmt);

@@ -27,8 +27,8 @@ document.querySelector('#country-list').addEventListener('click', (e) => {
 //-----LOCAL STORAGE FETCH FUNCTIONS-------------------------------------------------------------------------------
 
 function fetchAPIData() {
-    const countriesAPI = 'http://localhost/Github/COMP-3512-A2/api-countries.php';
-    const citiesAPI = 'http://localhost/Github/COMP-3512-A2/api-cities.php';
+    const countriesAPI = './api-countries.php';
+    const citiesAPI = './api-cities.php';
 
     if (localStorage.getItem('Countries') == null) {
         fetch(countriesAPI, {
@@ -103,4 +103,3 @@ function loadCountries(countries) {
 }
 
 //-----COUNTRY FILTERS---------------------------------------------------------------------------------------------
-
