@@ -42,6 +42,6 @@ if (!mysqli_stmt_prepare($stmt, $conti)) {
         <!-- All of the countries will be populated here as list items -->
 
         <!-- Get's the list of cities -->
-        <form method="GET" action="./single-country.php?"></form>
+        <form method="GET" action="../single-country.php?"></form>
     </ul>
 </div>
