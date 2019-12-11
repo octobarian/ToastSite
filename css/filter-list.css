@@ -137,33 +137,39 @@ summary {
 .country-photo-container>h1 {
     font-size: 150%;
 }
+
 @media screen and (max-width: 900px) {
-    .main-container{
+    .main-container {
         grid-template-columns: 100%;
         grid-template-rows: 25% 40% 35%;
     }
 
-    .country-container{
+    .country-container {
         grid-column: 1/2;
         grid-row: 1/2;
     }
 
-    #country-filter{
+    #country-filter {
         height: 7em;
         width: 90%;
     }
 
-    #country-list{
+    #country-list {
         height: 10em;
         width: 90%;
     }
 
-    .details-container{
+    .details-container {
         grid-column: 1/2;
         grid-row: 2/3;
     }
-    .country-photo-container{
+
+    .country-photo-container {
         grid-column: 1/2;
         grid-row: 3/4;
     }
+}
+
+#show {
+    display: none;
 }

@@ -12,7 +12,24 @@ if (!mysqli_stmt_prepare($stmt, $conti)) {
     mysqli_stmt_execute($stmt);
     $continents = mysqli_stmt_get_result($stmt);
 }
+mysqli_stmt_close($stmt);
 
+$image = "SELECT CountryCodeISO FROM imagedetails GROUP BY CountryCodeISO";
+$stmt = mysqli_stmt_init($conn);
+mysqli_stmt_prepare($stmt, $image);
+mysqli_stmt_execute($stmt);
+$img = mysqli_stmt_get_result($stmt);
+
+$countryImageArr = [];
+
+while($images = mysqli_fetch_assoc($img)){
+    array_push($countryImageArr, $images['CountryCodeISO']);
+}
+$parsed = json_encode($countryImageArr);
+echo $parsed;
+mysqli_stmt_close($stmt);
+
+//echo json_encode($images);
 ?>
 
 
@@ -31,6 +48,9 @@ if (!mysqli_stmt_prepare($stmt, $conti)) {
         <button class="btn" id='continentButton' type='button' onclick='selectContinent()'>Submit</button>
         <button class="btn" id='reset' type='button' onclick='reset()'>Reset</button>
     </div>
+    <button class="btn" id='hide' type='button' onclick='hideFilters()'>Hide Filters</button>
+    <button class="btn" id='show' type='button' onclick='showFilters()'>Show Filters</button>
+    <button class="btn" id='images' type='button' onclick='showImages(<?= $parsed ?>)'>Show Images Only</button>
     <ul>
         <!-- Add the filter options for countries here -->
     </ul>
