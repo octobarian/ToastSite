@@ -137,7 +137,7 @@ summary {
 .country-photo-container>h1 {
     font-size: 150%;
 }
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 900px) {
     .main-container{
         grid-template-columns: 100%;
         grid-template-rows: 25% 40% 35%;
@@ -145,6 +145,7 @@ summary {
     .country-container{
         grid-column: 1/2;
         grid-row: 1/2;
+        max-height: 25%;
     }
     .details-container{
         grid-column: 1/2;
