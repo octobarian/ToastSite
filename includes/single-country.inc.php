@@ -20,7 +20,7 @@ if (isset($_GET['ISO'])) {
             mysqli_stmt_prepare($stmt, $sql);
             mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
         } else {
-            header("Location: /index.php?error=selectedCountryError");
+            header("Location: ../index.php?error=selectedCountryError");
         }
 
         mysqli_stmt_execute($stmt);
@@ -42,7 +42,7 @@ if (!mysqli_stmt_prepare($stmt, $listCities)) {
         mysqli_stmt_prepare($stmt, $listCities);
         mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
     } else {
-        header("Location: //index.php?error=countryError-A");
+        header("Location: ../index.php?error=countryError-A");
     }
 
     mysqli_stmt_execute($stmt);
@@ -64,7 +64,7 @@ if (!mysqli_stmt_prepare($stmt, $photoList)) {
         mysqli_stmt_prepare($stmt, $photoList);
         mysqli_stmt_bind_param($stmt, "s", $selectedCountry);
     } else {
-        header("Location: ./single-country.php?ISO=CA");
+        header("Location: ../single-country.php?ISO=CA");
     }
 
     mysqli_stmt_execute($stmt);
