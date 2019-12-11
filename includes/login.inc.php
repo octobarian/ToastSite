@@ -12,7 +12,7 @@ if(isset($_POST['login-submit'])){
     }
     else{
         //login with a username OR an EMAIL
-        $sql = "SELECT * FROM userslogin WHERE UserName=?;";
+        $sql = "SELECT * FROM userslogin WHERE UserName=?";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
             //statment not allowed to prevent injection attacks
@@ -20,10 +20,12 @@ if(isset($_POST['login-submit'])){
             exit();
         }
         else{
+            mysqli_stmt_prepare($stmt, $sql);
             mysqli_stmt_bind_param($stmt, "s", $mailuid);
             mysqli_stmt_execute($stmt);
             //$RESULT = THE STORED PASS
             $result=mysqli_stmt_get_result($stmt);
+            $resultString=json_encode($result);
             //is there actual data?
             if($row=mysqli_fetch_assoc($result)){
                 //$digest = password_hash($password, PASSWORD_BCRYPT, ['cost'  => 12]);
@@ -62,7 +64,7 @@ if(isset($_POST['login-submit'])){
                 }
             }
             else{
-            header("Location: ../index.php?error=nouser");
+            header("Location: ../index.php?error=nouser&user=".$mailuid."&result=".$resultString);
             exit();
             }
         }

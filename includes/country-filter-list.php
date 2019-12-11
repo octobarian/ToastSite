@@ -26,10 +26,8 @@ while($images = mysqli_fetch_assoc($img)){
     array_push($countryImageArr, $images['CountryCodeISO']);
 }
 $parsed = json_encode($countryImageArr);
-echo $parsed;
 mysqli_stmt_close($stmt);
 
-//echo json_encode($images);
 ?>
 
 
@@ -50,7 +48,7 @@ mysqli_stmt_close($stmt);
     </div>
     <button class="btn" id='hide' type='button' onclick='hideFilters()'>Hide Filters</button>
     <button class="btn" id='show' type='button' onclick='showFilters()'>Show Filters</button>
-    <button class="btn" id='images' type='button' onclick='showImages(<?= $parsed ?>)'>Show Images Only</button>
+    <button class="btn" id='images' type='button' onclick='showImages(<?= $parsed ?>)'>Countries With Images</button>
     <ul>
         <!-- Add the filter options for countries here -->
     </ul>

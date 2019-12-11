@@ -89,6 +89,11 @@ summary {
     align-content: center;
 }
 
+#country-list a,
+#country-city-list a {
+    text-decoration: none;
+}
+
 /* Changes the Country Filter + List Names */
 .country-container>h1 {
     font-size: 145%;
