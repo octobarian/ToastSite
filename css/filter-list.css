@@ -145,8 +145,12 @@ summary {
     .country-container{
         grid-column: 1/2;
         grid-row: 1/2;
-        max-height: 25%;
     }
+
+    #country-list{
+        height: 10em;
+    }
+
     .details-container{
         grid-column: 1/2;
         grid-row: 2/3;
