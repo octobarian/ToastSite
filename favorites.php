@@ -3,18 +3,25 @@ require "header.php";
 require "includes/dbh.inc.php";
 ?>
 
-<main>
+<main style="background-color: lightslategray">
     <div id="favList">
         <?php
         if (isset($_SESSION['favPhotos'])) {
             if (sizeof($_SESSION['favPhotos']) > 0) {
+
+                echo '<div>';
+                echo '<h1>Favorite Photos</h1>';
+                echo '<form action="" method="post">';
+                echo '<input class="btn" type="submit" name="removeAll" value="Remove ALL from Favorites">';
+                echo '</form>';
+                echo '</div>';
                 foreach ($_SESSION['favPhotos'] as $i) {
 
                     if ($conn->connect_error) {
                         exit('Error connecting to the database');
                     }
 
-                    $sql = "SELECT ImageID FROM imagedetails WHERE Path=?";
+                    $sql = "SELECT * FROM imagedetails WHERE Path=?";
                     $stmt = mysqli_stmt_init($conn);
 
                     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -34,9 +41,11 @@ require "includes/dbh.inc.php";
                     }
                     mysqli_stmt_close($stmt);
                     echo '<div>';
+                    echo '<h5>' . $id['Title'] . '</h5>';
                     echo '<a href="single-photo.php?ImageID=' . $id['ImageID'] . '">';
-                    $img = '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/medium640/' . $i . '">';
+                    $img = '<img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/small320/' . $i . '">';
                     echo $img;
+                    echo '</a>';
                     createRemove($i);
                     echo '</div>';
                 }
@@ -56,7 +65,7 @@ function createRemove($i)
 {
     echo '<form action="" method="post">';
     echo '<input type="hidden" name="path" value="' . $i . '">';
-    echo '<input type="submit" name="remove" value="Remove from Favorites">';
+    echo '<input class="btn" type="submit" name="remove" value="Remove from Favorites">';
     echo '</form>';
 }
 
@@ -68,5 +77,10 @@ if (isset($_POST['remove'])) {
         $_SESSION['favPhotos'] = array_values($_SESSION['favPhotos']);
         header("Location: favorites.php");
     }
+}
+
+if (isset($_POST['removeAll'])) {
+    $_SESSION['favPhotos'] = [];
+    header("Location: favorites.php");
 }
 ?>

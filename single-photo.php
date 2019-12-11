@@ -120,7 +120,13 @@ require "header.php";
     <div id='container'>
         <div id='photo'>
             <img src="https://storage.googleapis.com/riley_comp3512_ass1_images/case-travel-master/images/large1024/<?= $imageRow['Path'] ?>">
+            <div id='hoverInfo'>
+                <script>
+                    displayHover(<?= json_encode($imageRow) ?>)
+                </script>
+            </div>  
         </div>
+
 
         <div id='infoContainer'>
             <div id="photoInfo">
