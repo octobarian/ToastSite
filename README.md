@@ -11,4 +11,5 @@ An Example of ground up development of a website
 •	Google Cloud Platform: Hosts the Database of images as well as the MySQL database of users.
 
 Find a running example of the site here:
-[https://toastsite-production.up.railway.app/]
+
+https://toastsite-production.up.railway.app/
