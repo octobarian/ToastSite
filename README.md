@@ -12,4 +12,4 @@ An Example of ground up development of a website
 
 Find a running example of the site here:
 
-https://toastsite-production.up.railway.app/
+https://toastsite.up.railway.app/
